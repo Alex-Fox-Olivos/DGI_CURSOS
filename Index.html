@@ -39,6 +39,15 @@
     .nav-scroll::-webkit-scrollbar{width:4px}.nav-scroll::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
     .module-header{width:100%;border:0;background:transparent;padding:8px 12px;font-size:10px;font-weight:600;color:var(--muted);letter-spacing:.7px;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:space-between;text-align:left}
     .module-header:hover,.module-header:focus-visible{color:var(--text);outline:none;background:rgba(255,255,255,.02)}
+.module-header-main{display:flex;align-items:center;gap:8px;min-width:0;flex:1}
+    .module-index{
+      flex:0 0 26px;width:26px;height:22px;border-radius:5px;
+      display:inline-flex;align-items:center;justify-content:center;
+      font-family:'Syne',sans-serif;font-size:11px;font-weight:800;
+      color:#fff;background:rgba(123,108,246,.20);
+      border:1px solid rgba(160,154,248,.32);line-height:1;opacity:1
+    }
+    .module-title-text{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
     .module-arrow{transition:transform .2s;font-size:9px}.module-arrow.open{transform:rotate(90deg)}
     .lesson-item{width:100%;border:0;background:transparent;padding:7px 12px 7px 24px;font-size:11.5px;cursor:pointer;color:var(--muted);display:flex;align-items:center;gap:7px;transition:all .15s;border-left:2px solid transparent;min-height:38px;text-align:left}
     .lesson-item:hover,.lesson-item:focus-visible{color:var(--text);background:var(--bg3);outline:none}
@@ -86,6 +95,196 @@
     .excel-prompt{background:var(--bg);border:1px solid var(--border);border-radius:7px;padding:11px 12px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:11px;color:#a8d8b0;line-height:1.65;white-space:pre-wrap;word-break:break-word;margin-top:10px;overflow-x:auto}
     code{background:var(--bg3);padding:2px 5px;border-radius:4px;font-size:11px;overflow-wrap:anywhere}
 
+
+    /* ══════════════════════════════════════════════════════
+       PRESENTACIÓN DEL CURSO
+       Adaptada a la portada visual solicitada
+    ══════════════════════════════════════════════════════ */
+    body.welcome-active .main{
+      background:
+        radial-gradient(circle at 50% -8%,rgba(123,108,246,.10),transparent 31%),
+        radial-gradient(circle at 84% 18%,rgba(212,132,90,.06),transparent 24%),
+        var(--bg);
+    }
+    body.welcome-active .dgi-footer{display:none}
+    .lesson-content.welcome-content{max-width:980px;padding-top:34px;padding-bottom:48px}
+    .course-welcome{width:100%;max-width:820px;margin:0 auto;text-align:center}
+    .welcome-hero{max-width:680px;margin:0 auto}
+    .welcome-mark{
+      width:52px;height:52px;margin:0 auto 20px;border-radius:15px;
+      display:flex;align-items:center;justify-content:center;
+      background:linear-gradient(145deg,#E29A70,var(--orange));
+      color:#fff;font-size:25px;line-height:1;
+      box-shadow:0 14px 34px rgba(212,132,90,.18)
+    }
+    .welcome-heading{
+      margin:0;font-family:'Syne',sans-serif;font-size:clamp(31px,5vw,47px);
+      font-weight:800;letter-spacing:-1.1px;line-height:1.02;color:#F5F6FB
+    }
+    .welcome-heading .welcome-accent{color:var(--orange)}
+    .welcome-description{
+      max-width:600px;margin:15px auto 16px;color:var(--muted);
+      font-size:13.5px;line-height:1.75
+    }
+    .welcome-description strong{color:var(--text);font-weight:600}
+    .welcome-dgi-badge{
+      min-height:30px;margin:0 auto 27px;display:flex;align-items:center;justify-content:center
+    }
+    .welcome-dgi-logo{display:block;width:88px;max-height:32px;object-fit:contain;opacity:.62}
+    .welcome-dgi-fallback{
+      display:none;align-items:center;justify-content:center;min-width:76px;height:27px;
+      border:1px solid rgba(145,105,255,.28);border-radius:6px;
+      color:#AFA4FF;font-family:'Syne',sans-serif;font-size:12px;font-weight:800;
+      letter-spacing:3px;opacity:.72
+    }
+    .welcome-stats{
+      display:flex;align-items:flex-start;justify-content:center;gap:48px;
+      margin:0 auto 31px
+    }
+    .welcome-stat{min-width:58px;text-align:center}
+    .welcome-stat-value{
+      font-family:'Syne',sans-serif;font-size:24px;font-weight:800;
+      line-height:1;color:var(--orange)
+    }
+    .welcome-stat-label{margin-top:6px;color:#59617D;font-size:9.5px;line-height:1.25}
+
+    .welcome-overview{
+      max-width:760px;margin:0 auto 28px;padding:22px 24px;
+      border:1px solid #28345C;border-radius:13px;background:#1A2143;
+      text-align:left;box-shadow:0 16px 44px rgba(0,0,0,.10)
+    }
+    .welcome-block-title{
+      display:flex;align-items:center;gap:7px;margin-bottom:11px;
+      color:#fff;font-family:'Syne',sans-serif;font-size:13px;font-weight:700
+    }
+    .welcome-overview-copy{
+      margin:0 0 15px;color:#9BA3BD;font-size:11.5px;line-height:1.75
+    }
+    .welcome-outline{display:flex;flex-direction:column;gap:8px}
+    .welcome-outline-item{display:flex;align-items:flex-start;gap:10px;min-width:0}
+    .welcome-outline-num{
+      width:32px;height:28px;flex:0 0 32px;border-radius:6px;
+      display:inline-flex;align-items:center;justify-content:center;
+      color:#FFFFFF!important;background:rgba(123,108,246,.24);
+      border:1px solid rgba(160,154,248,.42);
+      font-family:'Syne',sans-serif;font-size:14px;font-weight:800;
+      line-height:1;opacity:1!important;text-shadow:0 1px 2px rgba(0,0,0,.35)
+    }
+    .welcome-outline-text{color:#A1A8BF;font-size:11px;line-height:1.55}
+    .welcome-outline-text strong{color:#F0F2F8;font-weight:700}
+
+    .welcome-benefits{max-width:760px;margin:0 auto 29px}
+    .welcome-section-title{
+      margin:0 0 13px;color:#fff;font-family:'Syne',sans-serif;
+      font-size:13px;font-weight:700;text-align:center
+    }
+    .welcome-benefit-grid{
+      display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px
+    }
+    .welcome-benefit-card{
+      min-width:0;padding:16px 14px;border:1px solid #28345C;border-radius:10px;
+      background:#1A2143;text-align:left;transition:transform .18s ease,border-color .18s ease
+    }
+    .welcome-benefit-card:hover{transform:translateY(-2px);border-color:rgba(123,108,246,.75)}
+    .welcome-benefit-icon{margin-bottom:7px;font-size:17px;line-height:1}
+    .welcome-benefit-title{
+      margin-bottom:5px;color:#F1F3F9;font-size:10.5px;font-weight:700;line-height:1.35
+    }
+    .welcome-benefit-text{color:#929AB4;font-size:9.5px;line-height:1.55}
+
+    .welcome-launch{
+      max-width:760px;margin:0 auto;display:grid;
+      grid-template-columns:minmax(0,1fr) minmax(0,1fr) 176px;
+      grid-template-rows:repeat(2,minmax(82px,auto));gap:10px;text-align:left
+    }
+    .welcome-module-card,.welcome-start-card{
+      border:1px solid #28345C;border-radius:10px;cursor:pointer;
+      transition:transform .18s ease,border-color .18s ease,filter .18s ease
+    }
+    .welcome-module-card{
+      position:relative;display:flex;align-items:flex-start;gap:11px;
+      width:100%;padding:15px 14px;background:#1A2143;color:inherit;text-align:left
+    }
+    .welcome-module-card:hover,.welcome-module-card:focus-visible{
+      transform:translateY(-2px);border-color:var(--orange);outline:none
+    }
+    .welcome-module-num{
+      width:36px;height:36px;flex:0 0 36px;border-radius:8px;
+      display:inline-flex;align-items:center;justify-content:center;
+      color:#FFFFFF!important;background:rgba(123,108,246,.25);
+      border:1px solid rgba(160,154,248,.45);
+      font-family:'Syne',sans-serif;font-size:15px;font-weight:800;
+      line-height:1;opacity:1!important;text-shadow:0 1px 2px rgba(0,0,0,.35)
+    }
+    .welcome-module-info{min-width:0;flex:1;display:block;padding-top:1px}
+    .welcome-module-title{
+      display:block;color:#F7F8FC;font-size:10.5px;font-weight:700;
+      line-height:1.4;margin:0 0 6px;overflow-wrap:anywhere
+    }
+    .welcome-module-meta{
+      display:block;color:#A7AFC8;font-size:9px;line-height:1.4;
+      overflow-wrap:anywhere
+    }
+    .welcome-start-card{
+      grid-column:3;grid-row:1 / span 2;display:flex;align-items:center;justify-content:center;
+      width:100%;padding:18px 14px;background:linear-gradient(150deg,#DE8C61,#C96F45);
+      border-color:rgba(255,255,255,.07);color:#fff;font-size:12px;font-weight:700;
+      line-height:1.45;text-align:center
+    }
+    .welcome-start-card:hover,.welcome-start-card:focus-visible{
+      transform:translateY(-2px);filter:brightness(1.06);outline:2px solid rgba(212,132,90,.30);outline-offset:2px
+    }
+
+    @media(max-width:680px){
+      .lesson-content.welcome-content{padding-top:26px;padding-bottom:34px}
+      .welcome-heading{font-size:34px}
+      .welcome-description{font-size:12.5px}
+      .welcome-overview{padding:20px}
+      .welcome-stats{gap:38px}
+      .welcome-launch{grid-template-columns:minmax(0,1fr) minmax(0,1fr) 148px}
+    }
+    @media(max-width:520px){
+      .lesson-content.welcome-content{padding:22px 9px 28px}
+      .welcome-mark{width:44px;height:44px;border-radius:12px;margin-bottom:17px;font-size:21px}
+      .welcome-heading{font-size:29px;letter-spacing:-.8px}
+      .welcome-description{max-width:345px;margin-top:12px;font-size:10.5px;line-height:1.7}
+      .welcome-dgi-badge{margin-bottom:21px}
+      .welcome-dgi-logo{width:74px;max-height:26px}
+      .welcome-stats{gap:36px;margin-bottom:25px}
+      .welcome-stat-value{font-size:20px}
+      .welcome-stat-label{font-size:8px}
+      .welcome-overview{padding:17px 16px;margin-bottom:22px;border-radius:10px}
+      .welcome-block-title{font-size:11px}
+      .welcome-overview-copy{font-size:9.5px;line-height:1.65;margin-bottom:13px}
+      .welcome-outline{gap:6px}
+      .welcome-outline-num{width:28px;height:25px;flex-basis:28px;font-size:12px}
+      .welcome-outline-text{font-size:9px;line-height:1.5}
+      .welcome-benefits{margin-bottom:22px}
+      .welcome-section-title{font-size:11px;margin-bottom:11px}
+      .welcome-benefit-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+      .welcome-benefit-card{padding:12px 10px;border-radius:8px}
+      .welcome-benefit-icon{font-size:14px;margin-bottom:6px}
+      .welcome-benefit-title{font-size:8.5px;margin-bottom:4px}
+      .welcome-benefit-text{font-size:7.7px;line-height:1.48}
+      .welcome-launch{
+        grid-template-columns:minmax(0,1fr) minmax(0,1fr) 91px;
+        grid-template-rows:repeat(2,minmax(63px,auto));gap:7px
+      }
+      .welcome-module-card{padding:12px 10px;gap:7px;border-radius:8px}
+      .welcome-module-num{width:30px;height:30px;flex-basis:30px;font-size:12px}
+      .welcome-module-title{font-size:8.5px;margin-bottom:3px}
+      .welcome-module-meta{font-size:7.4px}
+      .welcome-start-card{padding:12px 8px;border-radius:8px;font-size:9px}
+    }
+    @media(max-width:380px){
+      .welcome-heading{font-size:27px}
+      .welcome-description{font-size:10px}
+      .welcome-benefit-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .welcome-benefit-text{font-size:8.4px}
+      .welcome-launch{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:auto}
+      .welcome-start-card{grid-column:1 / -1;grid-row:auto;min-height:54px;font-size:10px}
+    }
+
     /* QUIZ */
     .quiz-section{margin-top:24px;padding-top:20px;border-top:1px solid var(--border)}.quiz-title{font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:#fff;margin-bottom:4px}.quiz-sub{font-size:12px;color:var(--muted);margin-bottom:16px}.quiz-q{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:11px}.quiz-q-text{font-size:13px;color:var(--text);font-weight:500;margin-bottom:10px;line-height:1.5}.quiz-options{display:flex;flex-direction:column;gap:7px}.quiz-opt{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:7px;padding:10px 13px;font-size:12.5px;color:var(--muted);cursor:pointer;transition:all .15s;text-align:left;min-height:44px;display:flex;align-items:center}.quiz-opt:hover,.quiz-opt:focus-visible{border-color:var(--violet);color:var(--text);outline:none}.quiz-opt.selected-correct{border-color:var(--green);background:rgba(74,222,128,.1);color:var(--green)}.quiz-opt.selected-wrong{border-color:var(--red);background:rgba(239,68,68,.1);color:#f87171}.quiz-opt.reveal-correct{border-color:var(--green);background:rgba(74,222,128,.05);color:var(--green)}.quiz-feedback{font-size:11.5px;margin-top:8px;padding:8px 11px;border-radius:6px;line-height:1.5}.quiz-feedback.correct{background:rgba(74,222,128,.08);color:var(--green);border:1px solid rgba(74,222,128,.2)}.quiz-feedback.wrong{background:rgba(239,68,68,.08);color:#f87171;border:1px solid rgba(239,68,68,.2)}
 
@@ -111,7 +310,8 @@
       <div class="sidebar-header">
         <div class="dgi-logo-wrap">
           <img class="dgi-logo" src="LogoDGI_Blanco.png" alt="Logo DGI" >
-                 </div>
+         
+        </div>
         <div class="course-title">Domina Claude: De cero a experto</div>
       </div>
       <div class="progress-section">
@@ -139,7 +339,7 @@
   'use strict';
 
   const MODULES=[
-    {id:'intro',title:'Introducción',lessons:[{id:'i1',title:'Presentación del curso',content:'intro'}]},
+    {id:'intro',title:'Introducción',lessons:[{id:'i1',title:'1.1 Presentación del curso',content:'intro'}]},
     {id:'m1',title:'¿Qué es Claude?',lessons:[
       {id:'m1l1',title:'2.1 Claude vs. otras IA',content:'m1l1'},
       {id:'m1l2',title:'2.2 Interfaz y funciones',content:'m1l2'},
@@ -339,11 +539,13 @@
   function renderNav(){
     const nav=document.getElementById('nav-scroll');
     nav.innerHTML='';
-    MODULES.forEach(module=>{
+    MODULES.forEach((module,moduleIndex)=>{
       const group=document.createElement('section');
       const header=document.createElement('button');
+      // La secuencia comienza en 01 para Introducción y continúa hasta 05.
+      const moduleNumber=String(moduleIndex+1).padStart(2,'0');
       header.type='button';header.className='module-header';header.setAttribute('aria-expanded',String(Boolean(state.open[module.id])));
-      header.innerHTML=`<span>${module.title}</span><span class="module-arrow ${state.open[module.id]?'open':''}">▶</span>`;
+      header.innerHTML=`<span class="module-header-main"><span class="module-index">${moduleNumber}</span><span class="module-title-text">${module.title}</span></span><span class="module-arrow ${state.open[module.id]?'open':''}">▶</span>`;
       header.addEventListener('click',()=>{state.open[module.id]=!state.open[module.id];saveState();renderNav()});
       group.appendChild(header);
 
@@ -384,6 +586,59 @@
     return `<section class="content-card"><div class="card-title"><span class="card-icon ${tone}">${section.icon||'•'}</span>${section.title}</div>${content}</section>`;
   }
 
+
+  function welcomeHTML(){
+    return `
+      <section class="course-welcome" aria-labelledby="welcome-course-title">
+        <div class="welcome-hero">
+          <div class="welcome-mark" aria-hidden="true">✦</div>
+          <h2 class="welcome-heading" id="welcome-course-title">Domina <span class="welcome-accent">Claude</span><br>de cero a experto</h2>
+          <p class="welcome-description">Un curso práctico y completo diseñado por la <strong>Dirección de Gestión de la Información</strong> para que el equipo saque el máximo provecho de Claude — desde sus fundamentos hasta la creación de agentes y automatizaciones avanzadas.</p>
+          <div class="welcome-dgi-badge">
+            <img class="welcome-dgi-logo" src="LogoDGI_Blanco.png" alt="Dirección de Gestión de la Información" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'">
+            <span class="welcome-dgi-fallback" aria-label="Dirección de Gestión de la Información">DGI</span>
+          </div>
+        </div>
+
+        <div class="welcome-stats" aria-label="Resumen del curso">
+          <div class="welcome-stat"><div class="welcome-stat-value">24</div><div class="welcome-stat-label">Lecciones</div></div>
+          <div class="welcome-stat"><div class="welcome-stat-value">4</div><div class="welcome-stat-label">Módulos</div></div>
+          <div class="welcome-stat"><div class="welcome-stat-value">~6h</div><div class="welcome-stat-label">de contenido</div></div>
+        </div>
+
+        <section class="welcome-overview" aria-labelledby="welcome-overview-title">
+          <div class="welcome-block-title" id="welcome-overview-title">📋 ¿De qué trata este curso?</div>
+          <p class="welcome-overview-copy">Este programa formativo te lleva desde los conceptos esenciales de Claude hasta su uso avanzado como plataforma de automatización. Está organizado en cuatro módulos progresivos que puedes completar a tu ritmo, con lecciones cortas, ejemplos prácticos y verificaciones de aprendizaje en cada etapa.</p>
+          <div class="welcome-outline">
+            <div class="welcome-outline-item"><span class="welcome-outline-num">01</span><div class="welcome-outline-text"><strong>Fundamentos</strong> — Qué es Claude, cómo navegar su interfaz, entender los modelos disponibles y configurarlo según tus preferencias.</div></div>
+            <div class="welcome-outline-item"><span class="welcome-outline-num">02</span><div class="welcome-outline-text"><strong>Herramientas Premium</strong> — Proyectos, artefactos, trabajo asistido en el navegador y Microsoft Office para potenciar tu productividad diaria.</div></div>
+            <div class="welcome-outline-item"><span class="welcome-outline-num">03</span><div class="welcome-outline-text"><strong>Skills y conectores</strong> — Crea, instala y personaliza habilidades propias. Conecta Claude con tus sistemas y flujos de trabajo existentes.</div></div>
+            <div class="welcome-outline-item"><span class="welcome-outline-num">04</span><div class="welcome-outline-text"><strong>Agentes y automatización</strong> — Claude Code, tareas programadas y agentes capaces de ejecutar procesos complejos con supervisión y trazabilidad.</div></div>
+          </div>
+        </section>
+
+        <section class="welcome-benefits" aria-labelledby="welcome-benefits-title">
+          <h3 class="welcome-section-title" id="welcome-benefits-title">🚀 ¿Por qué tomar este curso?</h3>
+          <div class="welcome-benefit-grid">
+            <article class="welcome-benefit-card"><div class="welcome-benefit-icon">⚡</div><div class="welcome-benefit-title">Productividad inmediata</div><div class="welcome-benefit-text">Aprenderás a reducir el tiempo en tareas repetitivas desde la primera semana, aplicando Claude en tu trabajo real.</div></article>
+            <article class="welcome-benefit-card"><div class="welcome-benefit-icon">🎯</div><div class="welcome-benefit-title">Aplicación práctica</div><div class="welcome-benefit-text">Cada lección está diseñada con casos de uso reales del entorno institucional, no solo teoría genérica.</div></article>
+            <article class="welcome-benefit-card"><div class="welcome-benefit-icon">🔗</div><div class="welcome-benefit-title">Integración con tus herramientas</div><div class="welcome-benefit-text">Aprenderás a conectar Claude con archivos, navegador, Office y sistemas propios para un flujo unificado.</div></article>
+            <article class="welcome-benefit-card"><div class="welcome-benefit-icon">🤖</div><div class="welcome-benefit-title">Automatización real</div><div class="welcome-benefit-text">Al terminar sabrás diseñar agentes y tareas que reduzcan trabajo operativo manteniendo el control humano.</div></article>
+            <article class="welcome-benefit-card"><div class="welcome-benefit-icon">📈</div><div class="welcome-benefit-title">Ventaja competitiva</div><div class="welcome-benefit-text">Dominar Claude es una habilidad diferenciadora para aplicar IA de manera estratégica, segura y auditable.</div></article>
+            <article class="welcome-benefit-card"><div class="welcome-benefit-icon">🏛️</div><div class="welcome-benefit-title">Aval de la DGI</div><div class="welcome-benefit-text">Contenido diseñado por la Dirección de Gestión de la Información y alineado con los objetivos institucionales.</div></article>
+          </div>
+        </section>
+
+        <section class="welcome-launch" aria-label="Acceso a los módulos del curso">
+          <button class="welcome-module-card" type="button" data-complete="m1l1"><span class="welcome-module-num">01</span><span class="welcome-module-info"><span class="welcome-module-title">¿Qué es Claude y cómo usarlo?</span><span class="welcome-module-meta">5 lecciones · Fundamentos</span></span></button>
+          <button class="welcome-module-card" type="button" data-complete="m2l1"><span class="welcome-module-num">02</span><span class="welcome-module-info"><span class="welcome-module-title">Herramientas especializadas</span><span class="welcome-module-meta">6 lecciones · Premium</span></span></button>
+          <button class="welcome-module-card" type="button" data-complete="m3l1"><span class="welcome-module-num">03</span><span class="welcome-module-info"><span class="welcome-module-title">Skills y conectores</span><span class="welcome-module-meta">8 lecciones · Premium</span></span></button>
+          <button class="welcome-module-card" type="button" data-complete="m4l1"><span class="welcome-module-num">04</span><span class="welcome-module-info"><span class="welcome-module-title">Funciones avanzadas y agentes</span><span class="welcome-module-meta">5 lecciones · Avanzado</span></span></button>
+          <button class="welcome-start-card" type="button" data-complete="m1l1">Comenzar el<br>curso →</button>
+        </section>
+      </section>`;
+  }
+
   function lessonHTML(lesson){
     let html=`<div class="lesson-eyebrow">${lesson.eyebrow}</div><h2 class="lesson-h1">${lesson.title}</h2><p class="lesson-lead">${lesson.lead}</p>`;
     if(lesson.premium)html+=`<div class="premium-card"><div class="premium-label">${lesson.premium[0]}</div><div class="tip-text">${lesson.premium[1]}</div></div>`;
@@ -404,6 +659,9 @@
   function renderLesson(){
     const body=document.getElementById('lesson-body');
     const main=document.getElementById('main-area');
+    const isWelcome=state.current==='i1';
+    document.body.classList.toggle('welcome-active',isWelcome);
+    body.classList.toggle('welcome-content',isWelcome);
     main.scrollTo({top:0,behavior:'auto'});
     if(state.current.endsWith('-q')){renderQuiz(state.current.replace('-q',''));return}
     const items=allItems();
@@ -411,6 +669,12 @@
     const item=items[index]||items[0];
     const lesson=LESSONS[item.content]||LESSONS.intro;
     document.getElementById('topbar-title').textContent=item.title;
+    if(item.content==='intro'){
+      body.innerHTML=welcomeHTML();
+      wireFooter();
+      document.title=`${item.title} — DGI`;
+      return;
+    }
     body.innerHTML=lessonHTML(lesson)+navFooter(index);
     wireFooter();
     document.title=`${item.title} — DGI`;
