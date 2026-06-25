@@ -1,941 +1,495 @@
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@600;700;800&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@700;800&display=swap');
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#0A0F1E;
-  --bg2:#111827;
-  --bg3:#1a2235;
-  --orange:#D4845A;
-  --violet:#7B6CF6;
-  --text:#E8EAF0;
-  --muted:#8B92A8;
-  --border:#1e2d4a;
-  --card:#131d33;
-  --radius:10px;
+  --bg:#0A0F1E;--bg2:#111827;--bg3:#1a2235;
+  --orange:#D4845A;--violet:#7B6CF6;
+  --text:#E8EAF0;--muted:#8B92A8;--border:#1e2d4a;--card:#131d33;--radius:10px;
 }
 
-.app{display:flex;height:100vh;min-height:700px;background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow:hidden}
+.app{display:flex;height:100vh;min-height:500px;background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow:hidden;position:relative}
 
-.sidebar{width:280px;min-width:280px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden}
-.sidebar-header{padding:20px 16px 16px;border-bottom:1px solid var(--border)}
-.dgi-brand{display:flex;align-items:center;gap:10px;margin-bottom:14px}
-.dgi-logo{width:36px;height:36px;background:linear-gradient(135deg,var(--violet),#5a4fd1);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:13px;color:#fff;letter-spacing:-0.5px}
-.dgi-text{font-size:10px;color:var(--muted);line-height:1.3;font-weight:500}
-.course-title{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;color:#fff;line-height:1.3}
-
-.progress-section{padding:12px 16px;border-bottom:1px solid var(--border)}
-.progress-label{font-size:11px;color:var(--muted);margin-bottom:6px;display:flex;justify-content:space-between}
-.progress-bar{height:4px;background:var(--border);border-radius:2px;overflow:hidden}
-.progress-fill{height:100%;background:linear-gradient(90deg,var(--violet),var(--orange));border-radius:2px;transition:width 0.4s ease}
-
-.nav-scroll{flex:1;overflow-y:auto;padding:8px 0}
-.nav-scroll::-webkit-scrollbar{width:4px}
-.nav-scroll::-webkit-scrollbar-track{background:transparent}
+/* ── SIDEBAR ── */
+.sidebar{width:260px;min-width:260px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;transition:transform .3s ease,width .3s ease}
+.sidebar-header{padding:14px 12px 12px;border-bottom:1px solid var(--border)}
+.dgi-logo-wrap{margin-bottom:10px;padding:7px 6px;background:rgba(90,0,170,.12);border-radius:8px;border:1px solid rgba(90,0,170,.25)}
+.dgi-svg{width:100%;height:auto;display:block}
+.course-title{font-family:'Syne',sans-serif;font-weight:700;font-size:12.5px;color:#fff;line-height:1.3}
+.progress-section{padding:9px 12px;border-bottom:1px solid var(--border)}
+.progress-label{font-size:10px;color:var(--muted);margin-bottom:5px;display:flex;justify-content:space-between}
+.progress-bar{height:3px;background:var(--border);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--violet),var(--orange));border-radius:2px;transition:width .4s}
+.nav-scroll{flex:1;overflow-y:auto;padding:4px 0}
+.nav-scroll::-webkit-scrollbar{width:3px}
 .nav-scroll::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
-
-.module-group{margin:4px 0}
-.module-header{padding:8px 16px;font-size:11px;font-weight:600;color:var(--muted);letter-spacing:0.8px;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:space-between;user-select:none}
+.module-header{padding:7px 12px;font-size:10px;font-weight:600;color:var(--muted);letter-spacing:.7px;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:space-between;user-select:none}
 .module-header:hover{color:var(--text)}
-.module-arrow{transition:transform 0.2s;font-size:10px}
+.module-arrow{transition:transform .2s;font-size:9px}
 .module-arrow.open{transform:rotate(90deg)}
-.lesson-item{padding:7px 16px 7px 28px;font-size:12.5px;cursor:pointer;color:var(--muted);display:flex;align-items:center;gap:8px;transition:all 0.15s;border-left:2px solid transparent;margin:1px 0}
+.lesson-item{padding:6px 12px 6px 24px;font-size:11.5px;cursor:pointer;color:var(--muted);display:flex;align-items:center;gap:6px;transition:all .15s;border-left:2px solid transparent;min-height:36px}
 .lesson-item:hover{color:var(--text);background:var(--bg3)}
-.lesson-item.active{color:var(--orange);border-left-color:var(--orange);background:rgba(212,132,90,0.08)}
+.lesson-item.active{color:var(--orange);border-left-color:var(--orange);background:rgba(212,132,90,.08)}
 .lesson-item.completed{color:#4ade80}
-.lesson-check{width:14px;height:14px;border-radius:50%;border:1.5px solid currentColor;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:8px}
+.lesson-check{width:13px;height:13px;border-radius:50%;border:1.5px solid currentColor;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:7px}
 .lesson-item.completed .lesson-check{background:#4ade80;border-color:#4ade80;color:#0A0F1E}
-.premium-badge{font-size:9px;background:linear-gradient(90deg,var(--orange),#e8a87a);color:#fff;padding:1px 5px;border-radius:4px;font-weight:600;margin-left:auto}
+.premium-badge{font-size:8px;background:linear-gradient(90deg,var(--orange),#e8a87a);color:#fff;padding:1px 4px;border-radius:3px;font-weight:700;margin-left:auto;white-space:nowrap}
 
-.main{flex:1;overflow-y:auto;display:flex;flex-direction:column}
-.main::-webkit-scrollbar{width:6px}
-.main::-webkit-scrollbar-track{background:var(--bg)}
+/* ── MAIN CONTENT ── */
+.main{flex:1;overflow-y:auto;display:flex;flex-direction:column;min-width:0}
+.main::-webkit-scrollbar{width:4px}
 .main::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+.lesson-content{max-width:720px;padding:24px 28px;margin:0 auto;width:100%}
 
-.lesson-content{max-width:760px;padding:32px 36px;margin:0 auto;width:100%}
+/* ── TOPBAR (mobile only) ── */
+.topbar{display:none;align-items:center;gap:10px;padding:10px 14px;background:var(--bg2);border-bottom:1px solid var(--border);flex-shrink:0}
+.menu-btn{background:none;border:1px solid var(--border);color:var(--muted);width:34px;height:34px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.topbar-title{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:#fff;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.topbar-prog{font-size:11px;color:var(--orange);font-weight:600;white-space:nowrap}
 
-.lesson-eyebrow{font-size:11px;color:var(--violet);font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
-.lesson-h1{font-family:'Syne',sans-serif;font-weight:800;font-size:26px;color:#fff;line-height:1.2;margin-bottom:12px}
-.lesson-lead{font-size:15px;color:var(--muted);line-height:1.7;margin-bottom:28px;border-left:3px solid var(--violet);padding-left:14px}
+/* ── OVERLAY (mobile) ── */
+.overlay{display:none;position:absolute;inset:0;background:rgba(0,0,0,.55);z-index:10}
+.overlay.show{display:block}
 
-.content-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
-.card-title{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;color:#fff;margin-bottom:12px;display:flex;align-items:center;gap:8px}
-.card-icon{width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
-.icon-orange{background:rgba(212,132,90,0.15);color:var(--orange)}
-.icon-violet{background:rgba(123,108,246,0.15);color:var(--violet)}
-.icon-green{background:rgba(74,222,128,0.1);color:#4ade80}
-
-.prose{font-size:14px;color:var(--muted);line-height:1.75}
-.prose p{margin-bottom:10px}
+/* ── CONTENT ELEMENTS ── */
+.lesson-eyebrow{font-size:10px;color:var(--violet);font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
+.lesson-h1{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:#fff;line-height:1.25;margin-bottom:10px}
+.lesson-lead{font-size:13.5px;color:var(--muted);line-height:1.7;margin-bottom:20px;border-left:3px solid var(--violet);padding-left:12px;border-radius:0}
+.content-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;margin-bottom:13px}
+.card-title{font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:#fff;margin-bottom:10px;display:flex;align-items:center;gap:7px}
+.card-icon{width:22px;height:22px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+.icon-orange{background:rgba(212,132,90,.15);color:var(--orange)}
+.icon-violet{background:rgba(123,108,246,.15);color:var(--violet)}
+.icon-green{background:rgba(74,222,128,.1);color:#4ade80}
+.prose{font-size:13px;color:var(--muted);line-height:1.75}
+.prose p{margin-bottom:8px}
 .prose strong{color:var(--text);font-weight:600}
-
-.tip-pro{background:rgba(123,108,246,0.08);border:1px solid rgba(123,108,246,0.25);border-radius:var(--radius);padding:14px 18px;margin:16px 0;position:relative}
-.tip-label{font-size:10px;font-weight:700;color:var(--violet);letter-spacing:0.8px;text-transform:uppercase;margin-bottom:6px}
-.tip-text{font-size:13.5px;color:var(--muted);line-height:1.65}
-
-.premium-card{background:rgba(212,132,90,0.06);border:1px solid rgba(212,132,90,0.3);border-radius:var(--radius);padding:14px 18px;margin:16px 0}
-.premium-label{font-size:10px;font-weight:700;color:var(--orange);letter-spacing:0.8px;text-transform:uppercase;margin-bottom:6px;display:flex;align-items:center;gap:6px}
-
-.steps{counter-reset:step;margin:12px 0}
-.step{display:flex;gap:12px;margin-bottom:12px;align-items:flex-start}
-.step-num{width:24px;height:24px;border-radius:50%;background:var(--violet);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
-.step-body{font-size:13.5px;color:var(--muted);line-height:1.6}
+.tip-pro{background:rgba(123,108,246,.08);border:1px solid rgba(123,108,246,.25);border-radius:var(--radius);padding:12px 15px;margin:13px 0}
+.tip-label{font-size:9.5px;font-weight:700;color:var(--violet);letter-spacing:.8px;text-transform:uppercase;margin-bottom:5px}
+.tip-text{font-size:12.5px;color:var(--muted);line-height:1.65}
+.premium-card{background:rgba(212,132,90,.06);border:1px solid rgba(212,132,90,.3);border-radius:var(--radius);padding:12px 15px;margin:13px 0}
+.premium-label{font-size:9.5px;font-weight:700;color:var(--orange);letter-spacing:.8px;text-transform:uppercase;margin-bottom:5px}
+.steps{margin:8px 0}
+.step{display:flex;gap:9px;margin-bottom:9px;align-items:flex-start}
+.step-num{width:21px;height:21px;border-radius:50%;background:var(--violet);color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.step-body{font-size:12.5px;color:var(--muted);line-height:1.6}
 .step-body strong{color:var(--text)}
-
-table.compare{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0}
-table.compare th{background:var(--bg3);color:var(--text);font-weight:600;padding:9px 12px;text-align:left;border-bottom:2px solid var(--violet)}
-table.compare td{padding:8px 12px;color:var(--muted);border-bottom:1px solid var(--border)}
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0}
+table.compare{width:100%;border-collapse:collapse;font-size:12px;min-width:320px}
+table.compare th{background:var(--bg3);color:var(--text);font-weight:600;padding:8px 10px;text-align:left;border-bottom:2px solid var(--violet);white-space:nowrap}
+table.compare td{padding:7px 10px;color:var(--muted);border-bottom:1px solid var(--border);font-size:11.5px}
 table.compare tr:last-child td{border-bottom:none}
 table.compare .highlight{color:var(--orange);font-weight:500}
 table.compare .check{color:#4ade80}
-table.compare .no{color:#ef4444}
-.model-badge{display:inline-block;padding:2px 7px;border-radius:4px;font-size:10px;font-weight:700}
-.badge-haiku{background:rgba(74,222,128,0.12);color:#4ade80}
-.badge-sonnet{background:rgba(123,108,246,0.15);color:var(--violet)}
-.badge-opus{background:rgba(212,132,90,0.15);color:var(--orange)}
-
-.summary-box{background:var(--bg3);border-top:2px solid var(--violet);border-radius:0 0 var(--radius) var(--radius);padding:16px 20px;margin-top:24px}
-.summary-title{font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:#fff;margin-bottom:8px}
-.summary-list{list-style:none;display:flex;flex-direction:column;gap:5px}
-.summary-list li{font-size:13px;color:var(--muted);display:flex;align-items:flex-start;gap:7px}
-.summary-list li::before{content:"→";color:var(--orange);flex-shrink:0;margin-top:1px}
-
-.quiz-section{margin-top:32px;padding-top:28px;border-top:1px solid var(--border)}
-.quiz-title{font-family:'Syne',sans-serif;font-weight:700;font-size:18px;color:#fff;margin-bottom:6px}
-.quiz-sub{font-size:13px;color:var(--muted);margin-bottom:20px}
-.quiz-q{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;margin-bottom:14px}
-.quiz-q-text{font-size:14px;color:var(--text);font-weight:500;margin-bottom:12px}
-.quiz-options{display:flex;flex-direction:column;gap:7px}
-.quiz-opt{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:9px 14px;font-size:13px;color:var(--muted);cursor:pointer;transition:all 0.15s;text-align:left}
+.model-badge{display:inline-block;padding:2px 6px;border-radius:4px;font-size:9.5px;font-weight:700}
+.badge-haiku{background:rgba(74,222,128,.12);color:#4ade80}
+.badge-sonnet{background:rgba(123,108,246,.15);color:var(--violet)}
+.badge-opus{background:rgba(212,132,90,.15);color:var(--orange)}
+.summary-box{background:var(--bg3);border-top:2px solid var(--violet);border-radius:0 0 var(--radius) var(--radius);padding:13px 16px;margin-top:20px}
+.summary-title{font-family:'Syne',sans-serif;font-weight:700;font-size:12px;color:#fff;margin-bottom:6px}
+.summary-list{list-style:none;display:flex;flex-direction:column;gap:4px}
+.summary-list li{font-size:12px;color:var(--muted);display:flex;align-items:flex-start;gap:6px}
+.summary-list li::before{content:"→";color:var(--orange);flex-shrink:0}
+.quiz-section{margin-top:24px;padding-top:20px;border-top:1px solid var(--border)}
+.quiz-title{font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:#fff;margin-bottom:4px}
+.quiz-sub{font-size:12px;color:var(--muted);margin-bottom:16px}
+.quiz-q{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:11px}
+.quiz-q-text{font-size:13px;color:var(--text);font-weight:500;margin-bottom:10px;line-height:1.5}
+.quiz-options{display:flex;flex-direction:column;gap:6px}
+.quiz-opt{background:var(--bg3);border:1px solid var(--border);border-radius:7px;padding:9px 13px;font-size:12.5px;color:var(--muted);cursor:pointer;transition:all .15s;text-align:left;min-height:42px;display:flex;align-items:center}
 .quiz-opt:hover{border-color:var(--violet);color:var(--text)}
-.quiz-opt.selected-correct{border-color:#4ade80;background:rgba(74,222,128,0.1);color:#4ade80}
-.quiz-opt.selected-wrong{border-color:#ef4444;background:rgba(239,68,68,0.1);color:#ef4444}
-.quiz-opt.reveal-correct{border-color:#4ade80;background:rgba(74,222,128,0.05);color:#4ade80}
-.quiz-feedback{font-size:12.5px;margin-top:8px;padding:8px 12px;border-radius:6px}
-.quiz-feedback.correct{background:rgba(74,222,128,0.08);color:#4ade80;border:1px solid rgba(74,222,128,0.2)}
-.quiz-feedback.wrong{background:rgba(239,68,68,0.08);color:#f87171;border:1px solid rgba(239,68,68,0.2)}
-
-.bottom-bar{border-top:1px solid var(--border);padding:14px 36px;display:flex;align-items:center;justify-content:space-between;background:var(--bg2);flex-shrink:0;max-width:760px;margin:0 auto;width:100%}
-.btn-complete{background:linear-gradient(135deg,var(--orange),#c9714a);color:#fff;border:none;padding:10px 22px;border-radius:8px;font-size:13.5px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:7px;font-family:'Inter',sans-serif;transition:opacity 0.15s}
-.btn-complete:hover{opacity:0.9}
-.btn-prev{background:transparent;border:1px solid var(--border);color:var(--muted);padding:9px 16px;border-radius:8px;font-size:13px;cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.15s}
+.quiz-opt.selected-correct{border-color:#4ade80;background:rgba(74,222,128,.1);color:#4ade80}
+.quiz-opt.selected-wrong{border-color:#ef4444;background:rgba(239,68,68,.1);color:#ef4444}
+.quiz-opt.reveal-correct{border-color:#4ade80;background:rgba(74,222,128,.05);color:#4ade80}
+.quiz-feedback{font-size:11.5px;margin-top:7px;padding:7px 11px;border-radius:6px;line-height:1.5}
+.quiz-feedback.correct{background:rgba(74,222,128,.08);color:#4ade80;border:1px solid rgba(74,222,128,.2)}
+.quiz-feedback.wrong{background:rgba(239,68,68,.08);color:#f87171;border:1px solid rgba(239,68,68,.2)}
+.bottom-bar{border-top:1px solid var(--border);padding:11px 28px;display:flex;align-items:center;justify-content:space-between;background:var(--bg2);flex-shrink:0;max-width:720px;margin:0 auto;width:100%}
+.btn-complete{background:linear-gradient(135deg,var(--orange),#c9714a);color:#fff;border:none;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;white-space:nowrap;min-height:42px}
+.btn-complete:hover{opacity:.9}
+.btn-prev{background:transparent;border:1px solid var(--border);color:var(--muted);padding:8px 13px;border-radius:8px;font-size:12.5px;cursor:pointer;font-family:'Inter',sans-serif;min-height:42px}
 .btn-prev:hover{border-color:var(--violet);color:var(--violet)}
-.lesson-counter{font-size:12px;color:var(--muted)}
+.lesson-counter{font-size:11px;color:var(--muted)}
+.dgi-footer{display:flex;align-items:center;justify-content:flex-end;gap:7px;padding:4px 28px 10px;max-width:720px;margin:0 auto;width:100%;opacity:.25}
+.list-items{display:flex;flex-direction:column;gap:6px;margin:8px 0}
+.list-item{display:flex;align-items:flex-start;gap:7px;font-size:13px;color:var(--muted)}
+.list-dot{width:5px;height:5px;border-radius:50%;background:var(--orange);flex-shrink:0;margin-top:5px}
+.apps-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:9px 0}
+.app-card{background:var(--bg3);border:1px solid var(--border);border-radius:7px;padding:10px 12px}
+.app-card-title{font-size:12px;font-weight:600;color:var(--text);margin-bottom:3px}
+.app-card-desc{font-size:11px;color:var(--muted);line-height:1.5}
+.excel-prompt{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 12px;font-family:monospace;font-size:11px;color:#a8d8b0;line-height:1.7;white-space:pre-wrap;word-break:break-word;margin-top:10px;overflow-x:auto}
 
-.dgi-footer{text-align:right;font-size:10px;color:var(--border);padding:4px 36px 8px;max-width:760px;margin:0 auto;width:100%}
-.dgi-footer span{color:rgba(123,108,246,0.4)}
+/* ══════════════════════
+   TABLET  (≤ 680px)
+══════════════════════ */
+@media(max-width:680px){
+  .sidebar{width:240px;min-width:240px}
+  .lesson-content{padding:20px 18px}
+  .bottom-bar{padding:10px 18px}
+  .dgi-footer{padding:4px 18px 8px}
+  .lesson-h1{font-size:20px}
+}
 
-.list-items{display:flex;flex-direction:column;gap:7px;margin:10px 0}
-.list-item{display:flex;align-items:flex-start;gap:9px;font-size:13.5px;color:var(--muted)}
-.list-dot{width:6px;height:6px;border-radius:50%;background:var(--orange);flex-shrink:0;margin-top:6px}
-
-.tags{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
-.tag{font-size:11.5px;padding:3px 10px;border-radius:20px;font-weight:500}
-.tag-violet{background:rgba(123,108,246,0.12);color:var(--violet);border:1px solid rgba(123,108,246,0.2)}
-.tag-orange{background:rgba(212,132,90,0.12);color:var(--orange);border:1px solid rgba(212,132,90,0.2)}
-
-.apps-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:12px 0}
-.app-card{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:12px 14px}
-.app-card-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px}
-.app-card-desc{font-size:12px;color:var(--muted);line-height:1.5}
-
-.excel-guide{background:rgba(74,222,128,0.04);border:1px solid rgba(74,222,128,0.2);border-radius:var(--radius);padding:18px 20px;margin:16px 0}
-.excel-prompt{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:12px 14px;font-family:'Inter',monospace;font-size:12.5px;color:#a8d8b0;line-height:1.7;white-space:pre-wrap;word-break:break-word}
-
-.hidden{display:none}
+/* ══════════════════════
+   MOBILE  (≤ 520px)
+══════════════════════ */
+@media(max-width:520px){
+  .topbar{display:flex}
+  .sidebar{
+    position:absolute;top:0;left:0;bottom:0;z-index:20;
+    width:280px;min-width:280px;
+    transform:translateX(-100%);
+  }
+  .sidebar.open{transform:translateX(0)}
+  .main{padding-top:0}
+  .lesson-content{padding:16px 14px}
+  .bottom-bar{padding:10px 14px;gap:6px}
+  .dgi-footer{padding:4px 14px 8px}
+  .lesson-h1{font-size:18px}
+  .lesson-lead{font-size:13px}
+  .apps-grid{grid-template-columns:1fr}
+  .btn-complete{font-size:12.5px;padding:8px 14px}
+  .btn-prev{font-size:12px;padding:8px 10px}
+  table.compare th,table.compare td{padding:6px 8px;font-size:11px}
+}
 </style>
 
-<h2 class="sr-only">Curso interactivo: Domina Claude — De cero a experto. Plataforma de aprendizaje de la Dirección de Gestión de la Información.</h2>
+<h2 class="sr-only">Curso Domina Claude — DGI. Plataforma de aprendizaje responsive.</h2>
 
 <div class="app" id="app">
 
-<div class="sidebar">
-  <div class="sidebar-header">
-    <div class="dgi-brand">
-      <div class="dgi-logo">
+  <!-- Overlay móvil -->
+  <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+  <!-- Topbar (solo mobile) -->
+  <div class="topbar" id="topbar">
+    <button class="menu-btn" onclick="toggleSidebar()" aria-label="Abrir menú">☰</button>
+    <span class="topbar-title" id="topbar-title">Domina Claude: DGI</span>
+    <span class="topbar-prog" id="topbar-prog">0%</span>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="dgi-logo-wrap">
         <img src="LogoDGI_Blanco.png" width="25" alt="">
       </div>
-      
+      <div class="course-title">Domina Claude: De cero a experto</div>
     </div>
-    <div class="course-title">Domina Claude: De cero a experto</div>
+    <div class="progress-section">
+      <div class="progress-label"><span>Progreso</span><span id="prog-pct">0%</span></div>
+      <div class="progress-bar"><div class="progress-fill" id="prog-bar" style="width:0%"></div></div>
+    </div>
+    <div class="nav-scroll" id="nav-scroll"></div>
   </div>
-  <div class="progress-section">
-    <div class="progress-label"><span>Progreso del curso</span><span id="prog-pct">0%</span></div>
-    <div class="progress-bar"><div class="progress-fill" id="prog-bar" style="width:0%"></div></div>
+
+  <!-- Main -->
+  <div class="main" id="main-area">
+    <div class="lesson-content" id="lesson-body"></div>
+    <div class="dgi-footer">
+      <svg width="34" height="11" viewBox="0 0 148 46" xmlns="http://www.w3.org/2000/svg">
+        <rect x="1" y="1" width="38" height="42" rx="3" fill="#5A00AA"/>
+        <rect x="13" y="9" width="16" height="22" rx="2" fill="#fff"/>
+        <rect x="45" y="1" width="38" height="42" rx="3" fill="#5A00AA"/>
+        <rect x="56" y="9" width="16" height="22" rx="2" fill="#fff"/>
+        <rect x="65" y="24" width="12" height="9" rx="1" fill="#5A00AA"/>
+        <rect x="89" y="1" width="38" height="42" rx="3" fill="#5A00AA"/>
+        <rect x="103" y="9" width="10" height="22" rx="2" fill="#fff"/>
+      </svg>
+      <span style="font-size:10px;color:#8B92A8">Dirección de Gestión de la Información</span>
+    </div>
   </div>
-  <div class="nav-scroll" id="nav-scroll"></div>
-</div>
-
-<div class="main" id="main-area">
-  <div class="lesson-content" id="lesson-body"></div>
-  <div class="dgi-footer"><span>DGI</span> · Dirección de Gestión de la Información</div>
-  <div style="height:1px"></div>
-</div>
-
 </div>
 
 <script>
-const MODULES = [
-  {id:'intro',title:'Introducción',lessons:[
-    {id:'intro-1',title:'Presentación del curso',content:'intro'}
-  ]},
+const MODULES=[
+  {id:'intro',title:'Introducción',lessons:[{id:'i1',title:'Presentación del curso',content:'intro'}]},
   {id:'m1',title:'¿Qué es Claude?',lessons:[
-    {id:'m1-1',title:'2.1 Claude vs. otras IA',content:'m1l1'},
-    {id:'m1-2',title:'2.2 Interfaz y funciones básicas',content:'m1l2'},
-    {id:'m1-3',title:'2.3 Modelos: Haiku, Sonnet, Opus',content:'m1l3'},
-    {id:'m1-4',title:'2.4 Apps: web, escritorio, móvil',content:'m1l4'},
-    {id:'m1-5',title:'2.5 Configuración de Claude',content:'m1l5'},
+    {id:'m1l1',title:'2.1 Claude vs. otras IA',content:'m1l1'},
+    {id:'m1l2',title:'2.2 Interfaz y funciones',content:'m1l2'},
+    {id:'m1l3',title:'2.3 Haiku, Sonnet, Opus',content:'m1l3'},
+    {id:'m1l4',title:'2.4 Apps: web, escritorio, móvil',content:'m1l4'},
+    {id:'m1l5',title:'2.5 Configuración',content:'m1l5'},
   ],quiz:true},
   {id:'m2',title:'Herramientas Claude',lessons:[
-    {id:'m2-1',title:'3.1 Organizar trabajo en proyectos',content:'m2l1'},
-    {id:'m2-2',title:'3.2 Artefactos: ¿qué son?',content:'m2l2'},
-    {id:'m2-3',title:'3.3 Artefactos: Excel y viz',content:'m2l3',premium:true},
-    {id:'m2-4',title:'3.4 Claude para Google Chrome',content:'m2l4',premium:true},
-    {id:'m2-5',title:'3.5 Claude para MS Office: Inst.',content:'m2l5',premium:true},
-    {id:'m2-6',title:'3.6 MS Office: Casos de uso',content:'m2l6',premium:true},
+    {id:'m2l1',title:'3.1 Proyectos',content:'m2l1'},
+    {id:'m2l2',title:'3.2 Artefactos: ¿qué son?',content:'m2l2'},
+    {id:'m2l3',title:'3.3 Excel y visualizaciones',content:'m2l3',premium:true},
+    {id:'m2l4',title:'3.4 Claude para Chrome',content:'m2l4',premium:true},
+    {id:'m2l5',title:'3.5 MS Office: Instalación',content:'m2l5',premium:true},
+    {id:'m2l6',title:'3.6 MS Office: Casos de uso',content:'m2l6',premium:true},
   ],quiz:true},
   {id:'m3',title:'Skills y Conectores',lessons:[
-    {id:'m3-1',title:'4.1 ¿Qué son las skills?',content:'m3l1',premium:true},
-    {id:'m3-2',title:'4.2 Instalar y usar skills',content:'m3l2',premium:true},
-    {id:'m3-3',title:'4.3 Cómo funcionan tus habilidades',content:'m3l3',premium:true},
-    {id:'m3-4',title:'4.4 Crear tu propia habilidad',content:'m3l4',premium:true},
-    {id:'m3-5',title:'4.5 Editar habilidades',content:'m3l5',premium:true},
-    {id:'m3-6',title:'4.6 Personalizar habilidades',content:'m3l6',premium:true},
-    {id:'m3-7',title:'4.7 ¿Qué son los conectores?',content:'m3l7',premium:true},
-    {id:'m3-8',title:'4.8 Complementos personales',content:'m3l8',premium:true},
+    {id:'m3l1',title:'4.1 ¿Qué son las Skills?',content:'m3l1',premium:true},
+    {id:'m3l2',title:'4.2 Instalar Skills',content:'m3l2',premium:true},
+    {id:'m3l3',title:'4.3 Cómo funcionan',content:'m3l3',premium:true},
+    {id:'m3l4',title:'4.4 Crear tu Skill',content:'m3l4',premium:true},
+    {id:'m3l5',title:'4.5 Editar habilidades',content:'m3l5',premium:true},
+    {id:'m3l6',title:'4.6 Personalizar Skills',content:'m3l6',premium:true},
+    {id:'m3l7',title:'4.7 Conectores',content:'m3l7',premium:true},
+    {id:'m3l8',title:'4.8 Complementos personales',content:'m3l8',premium:true},
   ],quiz:true},
-  {id:'m4',title:'Agentes y funciones avanzadas',lessons:[
-    {id:'m4-1',title:'5.1 Claude Code',content:'m4l1'},
-    {id:'m4-2',title:'5.2 Plugins en Claude',content:'m4l2'},
-    {id:'m4-3',title:'5.3 Tareas programadas',content:'m4l3'},
-    {id:'m4-4',title:'5.4 Cómo funcionan los agentes',content:'m4l4'},
-    {id:'m4-5',title:'5.5 Crear agentes en Claude',content:'m4l5'},
+  {id:'m4',title:'Agentes y Avanzado',lessons:[
+    {id:'m4l1',title:'5.1 Claude Code',content:'m4l1'},
+    {id:'m4l2',title:'5.2 Plugins en Claude',content:'m4l2'},
+    {id:'m4l3',title:'5.3 Tareas programadas',content:'m4l3'},
+    {id:'m4l4',title:'5.4 Cómo funcionan los Agentes',content:'m4l4'},
+    {id:'m4l5',title:'5.5 Crear Agentes',content:'m4l5'},
   ],quiz:true}
 ];
 
-const QUIZZES = {
-  m1:{
-    title:'Quiz: ¿Qué es Claude?',
-    questions:[
-      {q:'¿Cuál es la principal ventaja de Claude frente a otros modelos de IA?',opts:['Velocidad de respuesta ilimitada','Énfasis en seguridad, honestidad y razonamiento de largo contexto','Generación exclusiva de imágenes en alta resolución','Integración nativa con Windows 11'],correct:1,exp:'Claude destaca por su enfoque en IA segura y honesta, con una ventana de contexto muy amplia, ideal para documentos extensos.'},
-      {q:'¿Qué modelo de Claude deberías usar para tareas rápidas y de bajo costo computacional?',opts:['Opus','Sonnet','Haiku','Claude Code'],correct:2,exp:'Haiku es el modelo más ágil y económico, diseñado para tareas simples, resúmenes rápidos y automatizaciones de alto volumen.'},
-      {q:'¿Dónde se configura el tono, idioma y preferencias personales de Claude?',opts:['En el panel de administración de Anthropic','En la sección "Configuración" dentro de la cuenta de usuario','A través del API con parámetros de sistema','No es posible personalizar estas preferencias'],correct:1,exp:'La sección de Configuración permite definir idioma, tono de respuesta, instrucciones persistentes y preferencias de formato.'}
-    ]
-  },
-  m2:{
-    title:'Quiz: Herramientas especializadas',
-    questions:[
-      {q:'¿Qué es un "Artefacto" en Claude?',opts:['Un archivo adjunto enviado al chat','Contenido autónomo generado (código, doc, tabla) que se muestra en panel separado','Un plugin de terceros para Office','Un tipo de conector de base de datos'],correct:1,exp:'Los artefactos son bloques de contenido completo (código, HTML, Markdown, SVG) que Claude genera en un panel lateral, listo para copiar o descargar.'},
-      {q:'¿Cuál es la función principal de Claude for Chrome?',opts:['Reemplazar al buscador de Google','Analizar el contenido de la página activa y asistir desde la barra lateral','Generar extensiones de navegador automáticamente','Bloquear publicidad en sitios web'],correct:1,exp:'Claude for Chrome se integra como barra lateral en el navegador, permitiendo resumir páginas, extraer datos y responder preguntas sobre el contenido visible.'},
-      {q:'Para generar una tabla Excel con fórmulas auditables en Claude, ¿qué debes especificar en tu prompt?',opts:['Solo el número de filas y columnas','El propósito, las columnas con tipo de dato, las fórmulas esperadas y el estilo DGI','El nombre del archivo y la versión de Excel','Únicamente el rango de datos a analizar'],correct:1,exp:'Un prompt estructurado con propósito, columnas tipadas, fórmulas y estilo garantiza que Claude genere una tabla auditable, reproducible y alineada con los estándares DGI.'}
-    ]
-  },
-  m3:{
-    title:'Quiz: Skills y Conectores',
-    questions:[
-      {q:'¿Cuál es la diferencia entre una Skill y un Conector en Claude?',opts:['Son términos sinónimos','Las Skills definen comportamientos/instrucciones; los Conectores enlazan con servicios externos','Los Conectores son gratis; las Skills son de pago','Las Skills solo funcionan en móvil'],correct:1,exp:'Las Skills son instrucciones o comportamientos personalizados que guían a Claude. Los Conectores (MCP) son integraciones que permiten a Claude acceder a herramientas externas como Google Drive o Slack.'},
-      {q:'¿Qué ventaja tiene crear una Skill personalizada para tu equipo?',opts:['Aumenta el límite de tokens del modelo','Permite estandarizar el tono, vocabulario y flujo de trabajo específico de tu organización','Reduce el precio de la suscripción','Activa Claude Code automáticamente'],correct:1,exp:'Una Skill personalizada actúa como un contexto persistente que hace que Claude responda siempre con el enfoque, terminología y formato que tu equipo necesita.'},
-      {q:'¿Qué protocolo usan los Conectores de Claude para comunicarse con servicios externos?',opts:['REST API exclusivamente','GraphQL','MCP (Model Context Protocol)','WebSockets sobre HTTPS'],correct:2,exp:'Los Conectores usan MCP (Model Context Protocol), un estándar abierto de Anthropic que permite a Claude comunicarse con herramientas externas de forma segura y estructurada.'}
-    ]
-  },
-  m4:{
-    title:'Quiz: Agentes y funciones avanzadas',
-    questions:[
-      {q:'¿Qué es Claude Code y para qué se utiliza?',opts:['Un editor de código visual dentro del navegador','Una CLI agentica que opera directamente en tu repositorio, crea archivos y ejecuta comandos','Un plugin para VS Code que autocompleta líneas','Una herramienta para convertir pseudocódigo a Python'],correct:1,exp:'Claude Code es una interfaz de línea de comandos que permite a Claude operar de forma autónoma en tu entorno de desarrollo: leer, escribir, refactorizar y ejecutar código directamente.'},
-      {q:'¿Qué diferencia a un "Agente" de una conversación normal con Claude?',opts:['El agente responde más rápido','El agente puede ejecutar múltiples pasos, usar herramientas y completar tareas complejas de forma autónoma','El agente usa siempre el modelo Opus','Los agentes no tienen memoria entre sesiones'],correct:1,exp:'Los agentes en Claude pueden encadenar acciones, usar herramientas (búsqueda, código, APIs) y trabajar de forma iterativa para completar tareas complejas sin intervención constante del usuario.'},
-      {q:'¿Qué son las "Tareas programadas" en Claude?',opts:['Atajos de teclado para respuestas rápidas','Automatizaciones que Claude ejecuta en horarios o condiciones definidas sin que el usuario esté presente','Plantillas de prompts guardadas en la nube','Recordatorios dentro del chat'],correct:1,exp:'Las tareas programadas permiten a Claude ejecutar acciones de forma autónoma en momentos definidos, como generar reportes diarios, monitorear información o enviar resúmenes periódicos.'}
-    ]
-  }
+const QUIZZES={
+  m1:{title:'Quiz: Módulo 1 — ¿Qué es Claude?',questions:[
+    {q:'¿Cuál es la principal ventaja diferencial de Claude frente a otros modelos?',opts:['Velocidad de respuesta ilimitada','Seguridad, honestidad y contexto de 200K tokens','Generación exclusiva de imágenes','Integración nativa con Windows'],correct:1,exp:'Claude destaca por su arquitectura orientada a IA segura y honesta, con ventana de contexto de 200K tokens, ideal para documentos institucionales extensos.'},
+    {q:'¿Qué modelo debes usar para tareas rápidas y de alto volumen?',opts:['Opus','Sonnet','Haiku','Claude Code'],correct:2,exp:'Haiku es el modelo más ágil y económico, diseñado para automatizaciones de volumen, clasificaciones y tareas simples repetitivas.'},
+    {q:'¿Dónde se configuran las instrucciones persistentes de Claude?',opts:['Panel de Anthropic','Configuración → Instrucciones del usuario','Mediante la API','No es posible configurarlo'],correct:1,exp:'En Configuración → Instrucciones se definen preferencias permanentes de idioma, tono, rol y contexto para todas las conversaciones.'}
+  ]},
+  m2:{title:'Quiz: Módulo 2 — Herramientas Claude',questions:[
+    {q:'¿Qué es un Artefacto en Claude?',opts:['Archivo adjunto al chat','Contenido autónomo en panel separado listo para usar','Plugin de terceros','Tipo de conector de base de datos'],correct:1,exp:'Los artefactos son bloques de contenido completo (código, Markdown, HTML, SVG) en un panel lateral, listos para copiar o descargar.'},
+    {q:'¿Qué hace Claude for Chrome?',opts:['Reemplaza a Google','Analiza la página activa y asiste desde barra lateral','Genera extensiones automáticamente','Bloquea publicidad'],correct:1,exp:'Claude for Chrome se integra como barra lateral, permitiendo resumir páginas, extraer datos y responder sobre el contenido visible.'},
+    {q:'Para una tabla Excel auditable estilo DGI, ¿qué debes incluir en el prompt?',opts:['Solo filas y columnas','Propósito, columnas tipadas, fórmulas y estilo DGI','Nombre del archivo y versión Excel','Solo el rango de datos'],correct:1,exp:'Un prompt estructurado con propósito, columnas tipadas, fórmulas y estándares DGI garantiza tablas auditables y reproducibles.'}
+  ]},
+  m3:{title:'Quiz: Módulo 3 — Skills y Conectores',questions:[
+    {q:'¿Cuál es la diferencia entre una Skill y un Conector?',opts:['Son sinónimos','Skills = instrucciones/rol; Conectores = acceso a servicios externos','Conectores son gratis; Skills de pago','Skills solo funcionan en móvil'],correct:1,exp:'Las Skills encapsulan instrucciones y comportamientos. Los Conectores (MCP) enlazan a servicios externos como Google Drive o Slack.'},
+    {q:'¿Qué ventaja tiene crear una Skill personalizada para la DGI?',opts:['Aumenta tokens del modelo','Estandariza tono, vocabulario y flujo institucional','Reduce precio de suscripción','Activa Claude Code automáticamente'],correct:1,exp:'Una Skill personalizada hace que Claude responda siempre con el enfoque, terminología y formato de tu organización.'},
+    {q:'¿Qué protocolo usan los Conectores de Claude?',opts:['REST API exclusivamente','GraphQL','MCP (Model Context Protocol)','WebSockets sobre HTTPS'],correct:2,exp:'Los Conectores usan MCP (Model Context Protocol), el estándar abierto de Anthropic para comunicación segura con herramientas externas.'}
+  ]},
+  m4:{title:'Quiz: Módulo 4 — Agentes y Funciones Avanzadas',questions:[
+    {q:'¿Qué es Claude Code?',opts:['Editor visual en el navegador','CLI agéntica que opera en tu repositorio autónomamente','Plugin para VS Code','Conversor de pseudocódigo'],correct:1,exp:'Claude Code es una CLI que opera autónomamente en tu repositorio: lee, escribe, refactoriza y ejecuta código directamente.'},
+    {q:'¿Qué diferencia a un Agente de una conversación normal?',opts:['El agente responde más rápido','Ejecuta múltiples pasos, usa herramientas y completa tareas de forma autónoma','Siempre usa Opus','No tiene memoria entre sesiones'],correct:1,exp:'Los agentes encadenan acciones, usan herramientas y trabajan iterativamente para completar tareas complejas sin intervención constante.'},
+    {q:'¿Qué son las Tareas programadas en Claude?',opts:['Atajos de teclado','Automatizaciones que Claude ejecuta en horarios definidos sin usuario presente','Plantillas guardadas','Recordatorios en el chat'],correct:1,exp:'Las tareas programadas permiten a Claude ejecutar acciones autónomas en momentos definidos: reportes diarios, monitoreo, resúmenes periódicos.'}
+  ]}
 };
 
-const CONTENT = {
-  intro:()=>`
-<div class="lesson-eyebrow">Bienvenida</div>
+const C={
+intro:`<div class="lesson-eyebrow">Bienvenida al curso</div>
 <h1 class="lesson-h1">Domina Claude:<br>De cero a experto</h1>
-<p class="lesson-lead">Una herramienta de IA que no sabes usar no es una ventaja; es ruido. Este curso transforma esa brecha en un diferencial real: dominarás Claude desde sus fundamentos hasta sus capacidades más avanzadas, con aplicación directa a los flujos de trabajo de la DGI.</p>
+<p class="lesson-lead">Una IA que no sabes usar es ruido, no ventaja. Este curso transforma esa brecha en diferencial real: dominarás Claude desde sus fundamentos hasta agentes autónomos, con aplicación directa a los flujos de la DGI.</p>
+<div class="content-card"><div class="card-title"><div class="card-icon icon-orange">🎯</div>¿Por qué este curso?</div><div class="prose"><p>Claude no es solo un chatbot. Es un sistema de razonamiento con contexto extendido, herramientas de automatización, integración con tus apps de trabajo y capacidad de actuar como agente autónomo.</p><p>Quien lo domine <strong>toma mejores decisiones, con más información, en menos tiempo.</strong></p></div></div>
+<div class="apps-grid"><div class="app-card"><div class="app-card-title">📚 4 módulos</div><div class="app-card-desc">Desde la interfaz básica hasta agentes autónomos</div></div><div class="app-card"><div class="app-card-title">⚡ 22 lecciones</div><div class="app-card-desc">Contenido práctico orientado a la DGI</div></div><div class="app-card"><div class="app-card-title">🧪 4 Quizzes</div><div class="app-card-desc">Verificación al final de cada módulo</div></div><div class="app-card"><div class="app-card-title">🏆 Certificado</div><div class="app-card-desc">Obtén tu certificado DGI al completar</div></div></div>
+<div class="tip-pro"><div class="tip-label">💡 Cómo aprovechar el curso</div><div class="tip-text">Navega en orden la primera vez. Luego usa el menú lateral para acceder a secciones de referencia cuando lo necesites. Marca lecciones completadas para rastrear tu progreso.</div></div>
+<div class="summary-box"><div class="summary-title">Al finalizar podrás:</div><ul class="summary-list"><li>Seleccionar el modelo correcto según la tarea</li><li>Crear artefactos, tablas y visualizaciones</li><li>Integrar Claude en Chrome, Word, Excel y PowerPoint</li><li>Diseñar Skills y Conectores para tu equipo</li><li>Configurar agentes y automatizaciones autónomas</li></ul></div>`,
 
-<div class="content-card">
-  <div class="card-title"><div class="card-icon icon-orange">🎯</div>¿Por qué este curso?</div>
-  <div class="prose">
-    <p>Claude no es solo un chatbot. Es un sistema de razonamiento con contexto extendido, herramientas de automatización, integración con tus aplicaciones de trabajo y capacidad para actuar como agente autónomo.</p>
-    <p>Quien domine estas capacidades en el equipo no solo trabaja más rápido: <strong>toma mejores decisiones, con más información, en menos tiempo.</strong></p>
-  </div>
-</div>
-
-<div class="apps-grid">
-  <div class="app-card"><div class="app-card-title">📚 4 módulos core</div><div class="app-card-desc">Desde la interfaz básica hasta la creación de agentes autónomos</div></div>
-  <div class="app-card"><div class="app-card-title">⚡ 22 lecciones</div><div class="app-card-desc">Contenido práctico orientado a casos reales de la DGI</div></div>
-  <div class="app-card"><div class="app-card-title">🧪 Quizzes</div><div class="app-card-desc">Verificación de aprendizaje al final de cada módulo</div></div>
-  <div class="app-card"><div class="app-card-title">🏆 Certificación</div><div class="app-card-desc">Completa el curso y obtén tu certificado DGI</div></div>
-</div>
-
-<div class="tip-pro"><div class="tip-label">💡 Cómo aprovechar este curso</div><div class="tip-text">Navega las lecciones en orden la primera vez. En segunda lectura, usa el menú lateral para acceder directamente a las secciones que necesitas como referencia. Marca las lecciones completadas para llevar tu progreso.</div></div>
-
-<div class="summary-box"><div class="summary-title">Al finalizar este curso podrás:</div><ul class="summary-list"><li>Seleccionar el modelo adecuado según la tarea</li><li>Crear artefactos, tablas y visualizaciones con Claude</li><li>Integrar Claude en Chrome, Word, Excel y PowerPoint</li><li>Diseñar skills y conectores personalizados para tu equipo</li><li>Configurar agentes y automatizaciones autónomas</li></ul></div>`,
-
-  m1l1:()=>`
-<div class="lesson-eyebrow">Módulo 1 · Lección 2.1</div>
+m1l1:`<div class="lesson-eyebrow">Módulo 1 · Lección 2.1</div>
 <h1 class="lesson-h1">¿Qué es Claude y qué lo hace diferente?</h1>
-<p class="lesson-lead">Claude es un modelo de lenguaje desarrollado por Anthropic con un enfoque fundacional distinto: fue diseñado para ser útil, inofensivo y honesto desde su arquitectura. No es solo una diferencia de marketing — es una diferencia de diseño.</p>
+<p class="lesson-lead">Claude fue diseñado para ser útil, inofensivo y honesto desde su arquitectura. No es solo marketing — es una diferencia de diseño fundamental.</p>
+<div class="content-card"><div class="card-title"><div class="card-icon icon-violet">⚖️</div>Ventajas diferenciales</div><div class="list-items"><div class="list-item"><div class="list-dot"></div><span><strong>200K tokens de contexto:</strong> Procesa documentos largos y múltiples archivos sin perder coherencia.</span></div><div class="list-item"><div class="list-dot"></div><span><strong>Razonamiento estructurado:</strong> Explicita su proceso de pensamiento, auditable en decisiones críticas.</span></div><div class="list-item"><div class="list-dot"></div><span><strong>Honestidad calibrada:</strong> Señala incertidumbres y reduce el riesgo de alucinaciones confiadas.</span></div><div class="list-item"><div class="list-dot"></div><span><strong>Seguimiento preciso de instrucciones:</strong> Respeta formatos, restricciones y roles de forma consistente.</span></div></div></div>
+<div class="content-card"><div class="card-title"><div class="card-icon icon-orange">🔍</div>Claude vs. el mercado</div><div class="table-wrap"><table class="compare"><thead><tr><th>Criterio</th><th>Claude</th><th>GPT-4o</th><th>Gemini</th></tr></thead><tbody><tr><td>Honestidad</td><td class="check">★★★★★</td><td>★★★☆☆</td><td>★★★☆☆</td></tr><tr><td>Instrucciones</td><td class="check">★★★★★</td><td>★★★★☆</td><td>★★★☆☆</td></tr><tr><td>Contexto largo</td><td class="check">200K</td><td>128K</td><td>1M exp.</td></tr><tr><td>Office/Drive</td><td class="highlight">Nativa DGI</td><td>Plugins</td><td>Google WS</td></tr></tbody></table></div></div>
+<div class="tip-pro"><div class="tip-label">💡 Tip Pro</div><div class="tip-text">Para análisis de documentos institucionales extensos (normativas, expedientes, informes), Claude es consistentemente superior. Un documento de 150 páginas cabe completo en una sola conversación.</div></div>
+<div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>Claude prioriza honestidad y razonamiento auditable</li><li>200K tokens permite trabajar con documentos extensos completos</li><li>Seguimiento preciso de instrucciones: ideal para flujos DGI estandarizados</li></ul></div>`,
 
-<div class="content-card">
-  <div class="card-title"><div class="card-icon icon-violet">⚖️</div>Ventajas diferenciales de Claude</div>
-  <div class="list-items">
-    <div class="list-item"><div class="list-dot"></div><span><strong>Ventana de contexto extensa:</strong> Procesa documentos largos, hilos de conversación complejos y múltiples archivos simultáneamente sin perder coherencia.</span></div>
-    <div class="list-item"><div class="list-dot"></div><span><strong>Razonamiento estructurado:</strong> Claude explicita su proceso de pensamiento, lo que lo hace auditable y más confiable en decisiones críticas.</span></div>
-    <div class="list-item"><div class="list-dot"></div><span><strong>Honestidad calibrada:</strong> Si no sabe algo o su respuesta tiene incertidumbre, lo señala. Reduce el riesgo de alucinaciones confiadas.</span></div>
-    <div class="list-item"><div class="list-dot"></div><span><strong>Seguimiento preciso de instrucciones:</strong> Respeta formatos, restricciones y roles de manera más consistente que la mayoría de modelos comparables.</span></div>
-  </div>
-</div>
-
-<div class="content-card">
-  <div class="card-title"><div class="card-icon icon-orange">🔍</div>Claude vs. el mercado</div>
-  <table class="compare">
-    <thead><tr><th>Criterio</th><th>Claude</th><th>GPT-4o</th><th>Gemini</th></tr></thead>
-    <tbody>
-      <tr><td>Honestidad ante incertidumbre</td><td class="check">★★★★★</td><td>★★★☆☆</td><td>★★★☆☆</td></tr>
-      <tr><td>Seguimiento de instrucciones</td><td class="check">★★★★★</td><td>★★★★☆</td><td>★★★☆☆</td></tr>
-      <tr><td>Contexto largo (200K tokens)</td><td class="check">Nativo</td><td>128K</td><td>1M (exp.)</td></tr>
-      <tr><td>Integración Office/Drive</td><td class="highlight">Nativa DGI</td><td>Vía plugins</td><td>Google WS</td></tr>
-      <tr><td>Agentes autónomos (Code)</td><td class="check">Claude Code</td><td>Operator</td><td>Limitado</td></tr>
-    </tbody>
-  </table>
-</div>
-
-<div class="tip-pro"><div class="tip-label">💡 Tip Pro</div><div class="tip-text">Para tareas de análisis de documentos institucionales extensos (informes, normativas, expedientes), Claude es consistentemente superior gracias a su ventana de contexto de 200K tokens. Un documento de 150 páginas cabe completo en una sola conversación.</div></div>
-
-<div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>Claude prioriza honestidad y razonamiento auditable sobre velocidad de respuesta</li><li>Su ventana de contexto de 200K tokens permite trabajar con documentos extensos</li><li>El seguimiento preciso de instrucciones lo hace ideal para flujos de trabajo estandarizados como los de la DGI</li></ul></div>`,
-
-  m1l2:()=>`
-<div class="lesson-eyebrow">Módulo 1 · Lección 2.2</div>
+m1l2:`<div class="lesson-eyebrow">Módulo 1 · Lección 2.2</div>
 <h1 class="lesson-h1">Interfaz de Claude y funciones básicas</h1>
-<p class="lesson-lead">Antes de construir flujos avanzados, necesitas dominar el entorno. La interfaz de Claude es minimalista por diseño, pero esconde capas de funcionalidad que la mayoría de usuarios nunca descubre.</p>
+<p class="lesson-lead">La interfaz es minimalista por diseño, pero esconde capas de funcionalidad que la mayoría de usuarios nunca descubre.</p>
+<div class="content-card"><div class="card-title"><div class="card-icon icon-violet">🗂️</div>Anatomía de la interfaz</div><div class="list-items"><div class="list-item"><div class="list-dot"></div><span><strong>Panel lateral izquierdo:</strong> Historial, proyectos y configuración.</span></div><div class="list-item"><div class="list-dot"></div><span><strong>Área de chat central:</strong> Zona principal con soporte Markdown, código y artefactos.</span></div><div class="list-item"><div class="list-dot"></div><span><strong>Panel de artefactos (derecha):</strong> Aparece automáticamente para contenido estructurado.</span></div><div class="list-item"><div class="list-dot"></div><span><strong>Barra de entrada:</strong> Soporta archivos (PDF, CSV, imágenes) y selección de modelo.</span></div></div></div>
+<div class="content-card"><div class="card-title"><div class="card-icon icon-orange">⚙️</div>Funciones esenciales</div><div class="steps"><div class="step"><div class="step-num">1</div><div class="step-body"><strong>Adjuntar archivos:</strong> Ícono clip → PDFs, CSV, DOCX, imágenes. Claude razona sobre el contenido.</div></div><div class="step"><div class="step-num">2</div><div class="step-body"><strong>Cambiar modelo:</strong> Barra inferior → selector de modelo (Haiku, Sonnet, Opus).</div></div><div class="step"><div class="step-num">3</div><div class="step-body"><strong>Regenerar respuesta:</strong> Ícono ↺ para una alternativa sin reescribir el prompt.</div></div><div class="step"><div class="step-num">4</div><div class="step-body"><strong>Editar mensajes:</strong> Lápiz sobre cualquier mensaje tuyo → edita y crea una rama alternativa.</div></div></div></div>
+<div class="tip-pro"><div class="tip-label">💡 Tip Pro</div><div class="tip-text">Usa la edición de mensajes (lápiz) en lugar de reescribir prompts desde cero. Mantiene el contexto y es más eficiente para iterar.</div></div>
+<div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>El panel de artefactos aparece automáticamente para contenido estructurado</li><li>Adjuntar archivos activa capacidades de análisis documental avanzado</li><li>Editar mensajes previos permite iterar sin perder el contexto</li></ul></div>`,
 
-<div class="content-card">
-  <div class="card-title"><div class="card-icon icon-violet">🗂️</div>Anatomía de la interfaz</div>
-  <div class="list-items">
-    <div class="list-item"><div class="list-dot"></div><span><strong>Panel lateral izquierdo:</strong> Historial de conversaciones, proyectos y acceso a configuración.</span></div>
-    <div class="list-item"><div class="list-dot"></div><span><strong>Área de chat central:</strong> Zona principal de interacción con soporte para Markdown, código y artefactos.</span></div>
-    <div class="list-item"><div class="list-dot"></div><span><strong>Panel de artefactos (derecha):</strong> Aparece automáticamente cuando Claude genera contenido autónomo (código, documentos, tablas).</span></div>
-    <div class="list-item"><div class="list-dot"></div><span><strong>Barra de entrada:</strong> Soporta carga de archivos (PDF, imágenes, CSV), selección de modelo y activación de herramientas.</span></div>
-  </div>
-</div>
+m1l3:`<div class="lesson-eyebrow">Módulo 1 · Lección 2.3</div>
+<h1 class="lesson-h1">Modelos: Haiku, Sonnet y Opus</h1>
+<p class="lesson-lead">Elegir el modelo correcto es una decisión estratégica. Cada uno tiene un perfil de velocidad, costo y capacidad diferente.</p>
+<div class="content-card"><div class="card-title"><div class="card-icon icon-orange">📊</div>Tabla comparativa</div><div class="table-wrap"><table class="compare"><thead><tr><th>Modelo</th><th>Velocidad</th><th>Mejor para</th></tr></thead><tbody><tr><td><span class="model-badge badge-haiku">Haiku</span></td><td class="check">⚡ Muy rápido</td><td>Volumen, clasificación, formato</td></tr><tr><td><span class="model-badge badge-sonnet">Sonnet</span></td><td>🔄 Rápido</td><td>Análisis, redacción, código</td></tr><tr><td><span class="model-badge badge-opus">Opus</span></td><td>⏳ Pausado</td><td>Razonamiento profundo, estrategia</td></tr></tbody></table></div></div>
+<div class="content-card"><div class="card-title"><div class="card-icon icon-violet">🎯</div>Guía de selección DGI</div><div class="list-items"><div class="list-item"><div class="list-dot"></div><span><strong>Haiku:</strong> Automatizaciones de alto volumen, etiquetar docs, extraer campos de formularios.</span></div><div class="list-item"><div class="list-dot"></div><span><strong>Sonnet:</strong> Informes, análisis de datos, código. <em>Modelo de uso general recomendado.</em></span></div><div class="list-item"><div class="list-dot"></div><span><strong>Opus:</strong> Análisis estratégico, normativas, síntesis de documentos extensos.</span></div></div></div>
+<div class="premium-card"><div class="premium-label">⭐ Premium</div><div class="tip-text">Opus tiene cuota mensual en plan Pro. Monitorea tu uso en <strong>Configuración → Uso</strong> para evitar interrupciones en flujos críticos.</div></div>
+<div class="tip-pro"><div class="tip-label">💡 Regla 80/20</div><div class="tip-text">El 80% de las tareas DGI se resuelven con Sonnet. Reserva Opus para análisis que requieren máxima profundidad. Haiku para todo lo repetitivo y de alto volumen.</div></div>
+<div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>Haiku = velocidad · Sonnet = equilibrio ideal · Opus = máxima profundidad</li><li>Sonnet es el modelo de trabajo diario recomendado para la DGI</li><li>Monitorea el uso de Opus para evitar límites en momentos críticos</li></ul></div>`,
 
-<div class="content-card">
-  <div class="card-title"><div class="card-icon icon-orange">⚙️</div>Funciones esenciales</div>
-  <div class="steps">
-    <div class="step"><div class="step-num">1</div><div class="step-body"><strong>Adjuntar archivos:</strong> Clic en el ícono de clip → sube PDFs, imágenes, CSV, DOCX. Claude lee y razona sobre el contenido.</div></div>
-    <div class="step"><div class="step-num">2</div><div class="step-body"><strong>Cambiar modelo:</strong> En la barra inferior, despliega el selector de modelo para elegir entre Haiku, Sonnet u Opus según tu tarea.</div></div>
-    <div class="step"><div class="step-num">3</div><div class="step-body"><strong>Regenerar respuesta:</strong> Usa el ícono ↺ para obtener una respuesta alternativa sin reescribir el prompt.</div></div>
-    <div class="step"><div class="step-num">4</div><div class="step-body"><strong>Editar mensajes previos:</strong> Clic en el ícono de lápiz sobre cualquier mensaje tuyo para editar y reenviar, creando una rama alternativa de conversación.</div></div>
-    <div class="step"><div class="step-num">5</div><div class="step-body"><strong>Copiar/descargar artefactos:</strong> En el panel derecho, botones directos para copiar código o descargar el contenido generado.</div></div>
-  </div>
-</div>
+m1l4:`<div class="lesson-eyebrow">Módulo 1 · Lección 2.4</div>
+<h1 class="lesson-h1">Apps de Claude: web, escritorio y móvil</h1>
+<p class="lesson-lead">Claude está disponible en múltiples plataformas. Conocer cada una te permite integrarlo en tu flujo sin fricción.</p>
+<div class="apps-grid"><div class="app-card"><div class="app-card-title">🌐 Claude.ai Web</div><div class="app-card-desc">Acceso completo. Proyectos, artefactos y configuración avanzada.</div></div><div class="app-card"><div class="app-card-title">💻 App escritorio</div><div class="app-card-desc">macOS y Windows. Atajo global para invocar Claude desde cualquier app.</div></div><div class="app-card"><div class="app-card-title">📱 App móvil</div><div class="app-card-desc">iOS y Android. Captura de fotos, voz a texto, consultas en campo.</div></div><div class="app-card"><div class="app-card-title">🔌 API</div><div class="app-card-desc">Para flujos automatizados y conectores a sistemas internos DGI.</div></div></div>
+<div class="tip-pro"><div class="tip-label">💡 App de escritorio</div><div class="tip-text">En macOS, <strong>Option + Espacio</strong> invoca Claude desde cualquier aplicación. Ideal para consultas rápidas mientras trabajas en Word o Excel sin cambiar de ventana.</div></div>
+<div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>La app web ofrece el entorno más completo para trabajo profundo</li><li>La app de escritorio permite integración nativa con cualquier flujo</li><li>La app móvil complementa con captura en campo y consultas rápidas</li></ul></div>`,
 
-<div class="tip-pro"><div class="tip-label">💡 Tip Pro</div><div class="tip-text">Usa la edición de mensajes (lápiz) en lugar de reescribir prompts desde cero. Esto mantiene el hilo de la conversación y es más eficiente para iterar sobre una respuesta específica.</div></div>
-
-<div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>El panel de artefactos aparece automáticamente para contenido estructurado</li><li>Adjuntar archivos activa capacidades de análisis documental</li><li>Editar mensajes previos permite iterar sin perder el contexto</li></ul></div>`,
-
-  m1l3:()=>`
-<div class="lesson-eyebrow">Módulo 1 · Lección 2.3</div>
-<h1 class="lesson-h1">Modelos de Claude: Haiku, Sonnet y Opus</h1>
-<p class="lesson-lead">Elegir el modelo correcto no es un detalle técnico, es una decisión estratégica. Cada modelo tiene un perfil de velocidad, costo y capacidad diferente. Usarlos bien determina la calidad y eficiencia de tu flujo de trabajo.</p>
-
-<div class="content-card">
-  <div class="card-title"><div class="card-icon icon-orange">📊</div>Tabla comparativa de modelos</div>
-  <table class="compare">
-    <thead><tr><th>Modelo</th><th>Velocidad</th><th>Capacidad</th><th>Mejor para</th></tr></thead>
-    <tbody>
-      <tr><td><span class="model-badge badge-haiku">Haiku</span></td><td class="check">⚡ Muy rápido</td><td>Básica-Media</td><td>Resúmenes rápidos, clasificación, formato</td></tr>
-      <tr><td><span class="model-badge badge-sonnet">Sonnet</span></td><td>🔄 Rápido</td><td class="highlight">Alta</td><td>Análisis, redacción, código, uso cotidiano</td></tr>
-      <tr><td><span class="model-badge badge-opus">Opus</span></td><td>⏳ Pausado</td><td class="highlight">Máxima</td><td>Razonamiento complejo, estrategia, documentos críticos</td></tr>
-    </tbody>
-  </table>
-</div>
-
-<div class="content-card">
-  <div class="card-title"><div class="card-icon icon-violet">🎯</div>Guía de selección para la DGI</div>
-  <div class="list-items">
-    <div class="list-item"><div class="list-dot"></div><span><strong>Haiku:</strong> Automatizaciones de alto volumen, clasificar correos, etiquetar documentos, extraer campos específicos de formularios.</span></div>
-    <div class="list-item"><div class="list-dot"></div><span><strong>Sonnet:</strong> Redacción de informes, análisis de datos, generación de código, respuestas a consultas complejas. <em>Es el modelo de uso general recomendado.</em></span></div>
-    <div class="list-item"><div class="list-dot"></div><span><strong>Opus:</strong> Análisis estratégico, revisión de normativas, síntesis de múltiples documentos extensos, toma de decisiones de alto impacto.</span></div>
-  </div>
-</div>
-
-<div class="premium-card"><div class="premium-label">⭐ Función Premium</div><div class="tip-text">Los límites de uso varían según el plan. En el plan Pro, Sonnet tiene uso prioritario. Opus tiene cuota mensual. Monitorea tu uso en <strong>Configuración → Uso</strong> para evitar interrupciones en flujos críticos.</div></div>
-
-<div class="tip-pro"><div class="tip-label">💡 Tip Pro: Regla 80/20</div><div class="tip-text">El 80% de las tareas cotidianas de la DGI se resuelven óptimamente con Sonnet. Reserva Opus para los documentos o análisis que requieren el máximo nivel de síntesis y juicio. Haiku para todo lo que sea repetitivo y de alto volumen.</div></div>
-
-<div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>Haiku = velocidad y volumen, Sonnet = equilibrio ideal, Opus = máxima profundidad</li><li>Sonnet es el modelo de trabajo diario recomendado para la DGI</li><li>Monitorea el uso de Opus para evitar límites en momentos críticos</li></ul></div>`,
-
-  m1l4:()=>`
-<div class="lesson-eyebrow">Módulo 1 · Lección 2.4</div>
-<h1 class="lesson-h1">Aplicaciones de Claude: web, escritorio y móvil</h1>
-<p class="lesson-lead">Claude está disponible en múltiples plataformas. Conocer cada una te permite integrar la IA en tu flujo de trabajo sin fricción, independientemente del dispositivo o contexto.</p>
-
-<div class="apps-grid">
-  <div class="app-card"><div class="app-card-title">🌐 Claude.ai Web</div><div class="app-card-desc">Acceso completo a todas las funciones. Gestión de proyectos, artefactos y configuración avanzada. Ideal para trabajo de escritorio en el navegador.</div></div>
-  <div class="app-card"><div class="app-card-title">💻 App de escritorio</div><div class="app-card-desc">Disponible para macOS y Windows. Permite atajos de teclado globales para invocar Claude desde cualquier app. Acceso sin abrir el navegador.</div></div>
-  <div class="app-card"><div class="app-card-title">📱 App móvil</div><div class="app-card-desc">iOS y Android. Captura de fotos, voz a texto, consultas rápidas en campo. Sincroniza proyectos y conversaciones con la web.</div></div>
-  <div class="app-card"><div class="app-card-title">🔌 API / Integraciones</div><div class="app-card-desc">Para flujos automatizados y conectores personalizados. Permite embeber Claude en sistemas internos de la DGI.</div></div>
-</div>
-
-<div class="tip-pro"><div class="tip-label">💡 Tip Pro: App de escritorio</div><div class="tip-text">En macOS, el atajo <strong>Option + Espacio</strong> invoca Claude desde cualquier aplicación. Perfecto para consultas rápidas mientras trabajas en Word, Excel o tu correo sin cambiar de ventana.</div></div>
-
-<div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>La app web ofrece el entorno más completo para trabajo profundo</li><li>La app de escritorio permite integración nativa con cualquier flujo de trabajo</li><li>La app móvil complementa con captura en campo y consultas rápidas</li></ul></div>`,
-
-  m1l5:()=>`
-<div class="lesson-eyebrow">Módulo 1 · Lección 2.5</div>
+m1l5:`<div class="lesson-eyebrow">Módulo 1 · Lección 2.5</div>
 <h1 class="lesson-h1">Configuración de Claude</h1>
-<p class="lesson-lead">La configuración de Claude es donde transforma de asistente genérico a un colaborador personalizado para tu contexto. Es el paso que la mayoría omite y que hace toda la diferencia.</p>
+<p class="lesson-lead">La configuración es donde Claude pasa de asistente genérico a colaborador personalizado. El paso que la mayoría omite y que hace toda la diferencia.</p>
+<div class="content-card"><div class="card-title"><div class="card-icon icon-orange">⚙️</div>Configuración esencial</div><div class="steps"><div class="step"><div class="step-num">1</div><div class="step-body"><strong>Instrucciones personalizadas:</strong> Configuración → Instrucciones. Define rol, contexto, formato y restricciones permanentes.</div></div><div class="step"><div class="step-num">2</div><div class="step-body"><strong>Idioma y tono:</strong> Español formal o informal. Puedes especificar terminología técnica de la DGI.</div></div><div class="step"><div class="step-num">3</div><div class="step-body"><strong>Privacidad:</strong> Configura si Claude puede usar tus conversaciones para mejorar el modelo.</div></div><div class="step"><div class="step-num">4</div><div class="step-body"><strong>Integraciones:</strong> Activa Google Drive, Slack, Notion u otras herramientas conectadas.</div></div></div></div>
+<div class="tip-pro"><div class="tip-label">💡 Instrucción DGI recomendada</div><div class="tip-text"><em>"Soy especialista en la Dirección de Gestión de la Información. Respuestas en español formal, con encabezados, orientadas a documentación institucional y terminología técnica del sector."</em></div></div>
+<div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>Las instrucciones personalizadas aplican en todas las conversaciones</li><li>Define idioma, tono y contexto institucional desde el inicio</li><li>Revisa privacidad antes de compartir información sensible</li></ul></div>`,
 
-<div class="content-card">
-  <div class="card-title"><div class="card-icon icon-orange">⚙️</div>Pasos de configuración esencial</div>
-  <div class="steps">
-    <div class="step"><div class="step-num">1</div><div class="step-body"><strong>Instrucciones personalizadas:</strong> Accede a Configuración → Instrucciones. Define tu rol, contexto laboral, preferencias de formato y restricciones permanentes. Claude las aplicará en todas las conversaciones.</div></div>
-    <div class="step"><div class="step-num">2</div><div class="step-body"><strong>Idioma y tono:</strong> Establece que las respuestas sean siempre en español formal o informal según tus necesidades. Puedes especificar terminología técnica de la DGI.</div></div>
-    <div class="step"><div class="step-num">3</div><div class="step-body"><strong>Historial y privacidad:</strong> Configura si Claude puede usar tus conversaciones para mejorar el modelo (desactivable). Revisa las políticas de retención de datos.</div></div>
-    <div class="step"><div class="step-num">4</div><div class="step-body"><strong>Integraciones conectadas:</strong> Accede a la sección de Conectores para activar Google Drive, Slack, Notion u otras herramientas de tu ecosistema.</div></div>
-  </div>
-</div>
-
-<div class="tip-pro"><div class="tip-label">💡 Tip Pro: Instrucción de contexto DGI</div><div class="tip-text">Incluye en tus instrucciones permanentes algo como: <em>"Soy especialista en la Dirección de Gestión de la Información de [Institución]. Mis respuestas deben ser en español formal, estructuradas con encabezados, orientadas a documentación institucional y con terminología técnica del sector."</em></div></div>
-
-<div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>Las instrucciones personalizadas son persistentes en todas las conversaciones</li><li>Define idioma, tono y contexto institucional desde el inicio</li><li>Revisa la configuración de privacidad antes de compartir información sensible</li></ul></div>`,
-
-  m2l1:()=>`
-<div class="lesson-eyebrow">Módulo 2 · Lección 3.1</div>
+m2l1:`<div class="lesson-eyebrow">Módulo 2 · Lección 3.1</div>
 <h1 class="lesson-h1">Organizar el trabajo en Proyectos</h1>
-<p class="lesson-lead">Los Proyectos son la funcionalidad que transforma Claude de un chat individual a un sistema de trabajo colaborativo con memoria contextual persistente.</p>
+<p class="lesson-lead">Los Proyectos transforman a Claude de un chat individual en un sistema de trabajo con memoria contextual persistente.</p>
+<div class="content-card"><div class="card-title"><div class="card-icon icon-violet">📁</div>¿Qué es un Proyecto?</div><div class="prose"><p>Un Proyecto combina: <strong>instrucciones persistentes</strong>, <strong>documentos de referencia</strong> (disponibles en todas las conversaciones) e <strong>historial relacionado</strong>.</p></div></div>
+<div class="content-card"><div class="card-title"><div class="card-icon icon-orange">🏗️</div>Crear un Proyecto DGI</div><div class="steps"><div class="step"><div class="step-num">1</div><div class="step-body"><strong>Crear:</strong> Panel lateral → "Nuevo Proyecto" → Nombre descriptivo.</div></div><div class="step"><div class="step-num">2</div><div class="step-body"><strong>Instrucciones:</strong> Define el rol específico de Claude para el proyecto.</div></div><div class="step"><div class="step-num">3</div><div class="step-body"><strong>Documentos base:</strong> Sube normativas, plantillas DGI, glosarios institucionales.</div></div><div class="step"><div class="step-num">4</div><div class="step-body"><strong>Usar:</strong> Cada nueva conversación hereda el contexto completo automáticamente.</div></div></div></div>
+<div class="tip-pro"><div class="tip-label">💡 Proyectos por área</div><div class="tip-text">Crea proyectos separados: "Gestión Documental", "Informes de Gestión", "Normativa Interna". Cada uno tiene su Claude especializado, sin re-explicar contexto.</div></div>
+<div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>Los Proyectos mantienen contexto, documentos e instrucciones persistentes</li><li>Ideales para flujos recurrentes con contexto especializado</li><li>Los documentos subidos están disponibles en todas sus conversaciones</li></ul></div>`,
 
-<div class="content-card">
-  <div class="card-title"><div class="card-icon icon-violet">📁</div>¿Qué es un Proyecto?</div>
-  <div class="prose"><p>Un Proyecto es un espacio de trabajo dedicado que combina: <strong>instrucciones persistentes</strong> (el contexto que Claude siempre tendrá), <strong>documentos de referencia</strong> (archivos que Claude puede consultar en cualquier conversación del proyecto) y <strong>historial de conversaciones</strong> relacionadas.</p></div>
-</div>
+m2l2:`<div class="lesson-eyebrow">Módulo 2 · Lección 3.2</div>
+<h1 class="lesson-h1">Artefactos: ¿Qué son y cómo se crean?</h1>
+<p class="lesson-lead">Los Artefactos son la diferencia entre recibir una respuesta y recibir un producto terminado listo para usar.</p>
+<div class="content-card"><div class="card-title"><div class="card-icon icon-violet">📦</div>Tipos de Artefactos</div><div class="list-items"><div class="list-item"><div class="list-dot"></div><span><strong>Código:</strong> Python, JS, SQL con syntax highlighting y copia directa.</span></div><div class="list-item"><div class="list-dot"></div><span><strong>Documentos Markdown:</strong> Informes, memorandos, plantillas estructuradas.</span></div><div class="list-item"><div class="list-dot"></div><span><strong>HTML interactivo:</strong> Dashboards, formularios, visualizaciones funcionales.</span></div><div class="list-item"><div class="list-dot"></div><span><strong>SVG:</strong> Gráficos vectoriales, diagramas editables.</span></div><div class="list-item"><div class="list-dot"></div><span><strong>Datos estructurados:</strong> CSV compatible con Excel.</span></div></div></div>
+<div class="tip-pro"><div class="tip-label">💡 Cómo forzar un Artefacto</div><div class="tip-text">Añade al final de tu prompt: <em>"Estructura la respuesta como artefacto con encabezados, tabla de indicadores y sección de recomendaciones."</em></div></div>
+<div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>Los artefactos son contenido autónomo en panel separado, listos para usar</li><li>Soportan código, documentos, HTML, SVG y datos estructurados</li><li>Mencionar "como artefacto" en el prompt garantiza este formato</li></ul></div>`,
 
-<div class="content-card">
-  <div class="card-title"><div class="card-icon icon-orange">🏗️</div>Crear y configurar un Proyecto DGI</div>
-  <div class="steps">
-    <div class="step"><div class="step-num">1</div><div class="step-body"><strong>Crear proyecto:</strong> Panel lateral → "Nuevo Proyecto" → Asigna nombre descriptivo (ej. "Análisis Normativo 2025").</div></div>
-    <div class="step"><div class="step-num">2</div><div class="step-body"><strong>Instrucciones del proyecto:</strong> Define el rol específico de Claude para este proyecto: "Eres un asistente de análisis normativo. Siempre cita el artículo específico de la norma relevante."</div></div>
-    <div class="step"><div class="step-num">3</div><div class="step-body"><strong>Subir documentos base:</strong> Adjunta los archivos de referencia (normativas, plantillas DGI, glosarios). Claude los tendrá disponibles en todas las conversaciones del proyecto.</div></div>
-    <div class="step"><div class="step-num">4</div><div class="step-body"><strong>Iniciar conversaciones:</strong> Desde el proyecto, cada nueva conversación hereda el contexto completo automáticamente.</div></div>
-  </div>
-</div>
-
-<div class="tip-pro"><div class="tip-label">💡 Tip Pro: Proyectos por área DGI</div><div class="tip-text">Crea proyectos separados por área o tipo de tarea: "Gestión Documental", "Informes de Gestión", "Normativa Interna". Cada uno tiene su propio Claude con contexto especializado. Es más eficiente que re-explicar el contexto en cada conversación.</div></div>
-
-<div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>Los Proyectos mantienen contexto, documentos e instrucciones de forma persistente</li><li>Son ideales para flujos de trabajo recurrentes con contexto especializado</li><li>Los documentos subidos al proyecto están disponibles en todas sus conversaciones</li></ul></div>`,
-
-  m2l2:()=>`
-<div class="lesson-eyebrow">Módulo 2 · Lección 3.2</div>
-<h1 class="lesson-h1">Artefactos de Claude: ¿Qué son y cómo se crean?</h1>
-<p class="lesson-lead">Los Artefactos son la diferencia entre recibir una respuesta en el chat y recibir un producto terminado. Son bloques de contenido autónomo que Claude genera en un panel separado, listos para usar.</p>
-
-<div class="content-card">
-  <div class="card-title"><div class="card-icon icon-violet">📦</div>Tipos de Artefactos</div>
-  <div class="list-items">
-    <div class="list-item"><div class="list-dot"></div><span><strong>Código:</strong> Scripts en Python, JavaScript, SQL u otro lenguaje. Se muestran con syntax highlighting y botón de copia directa.</span></div>
-    <div class="list-item"><div class="list-dot"></div><span><strong>Documentos Markdown:</strong> Informes, memorandos, plantillas con formato estructurado.</span></div>
-    <div class="list-item"><div class="list-dot"></div><span><strong>HTML interactivo:</strong> Dashboards, formularios, visualizaciones que funcionan en el navegador.</span></div>
-    <div class="list-item"><div class="list-dot"></div><span><strong>SVG:</strong> Gráficos vectoriales, diagramas, ilustraciones editables.</span></div>
-    <div class="list-item"><div class="list-dot"></div><span><strong>Tablas y datos estructurados:</strong> Incluyendo formato CSV o compatibles con Excel.</span></div>
-  </div>
-</div>
-
-<div class="content-card">
-  <div class="card-title"><div class="card-icon icon-orange">✨</div>Cómo activar la generación de Artefactos</div>
-  <div class="prose"><p>Los artefactos se activan automáticamente cuando Claude detecta que el contenido es <strong>autónomo y reutilizable</strong>. Puedes forzarlos explícitamente en tu prompt:</p></div>
-  <div class="tip-pro" style="margin-top:10px"><div class="tip-label">Ejemplo de prompt</div><div class="tip-text">"Genera un informe ejecutivo en Markdown sobre el estado del sistema de gestión documental. Estructúralo como artefacto con encabezados, tabla de indicadores y sección de recomendaciones."</div></div>
-</div>
-
-<div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>Los artefactos son contenido autónomo generado en panel separado</li><li>Soportan código, documentos, HTML, SVG y datos estructurados</li><li>Mencionar explícitamente "como artefacto" en el prompt garantiza este formato</li></ul></div>`,
-
-  m2l3:()=>`
-<div class="lesson-eyebrow">Módulo 2 · Lección 3.3 <span class="premium-badge">PREMIUM</span></div>
+m2l3:`<div class="lesson-eyebrow">Módulo 2 · Lección 3.3 <span class="premium-badge">PREMIUM</span></div>
 <h1 class="lesson-h1">Artefactos: Excel y visualizaciones</h1>
-<p class="lesson-lead">Claude puede generar tablas Excel con fórmulas auditables, gráficos y estructuras de datos listas para el flujo de trabajo de la DGI. Esta lección incluye una guía de prompts estructurados.</p>
+<p class="lesson-lead">Claude genera tablas Excel con fórmulas auditables y dashboards listos para el flujo de trabajo de la DGI.</p>
+<div class="premium-card"><div class="premium-label">⭐ Capacidad Premium</div><div class="tip-text">Requiere plan Pro o Teams con modelo Sonnet u Opus para máxima calidad.</div></div>
+<div class="content-card"><div class="card-title"><div class="card-icon icon-green">📋</div>Prompt para tabla Excel auditable DGI</div>
+<div class="excel-prompt">Necesito una tabla Excel (CSV) con:
 
-<div class="premium-card"><div class="premium-label">⭐ Capacidad Premium</div><div class="tip-text">La generación de artefactos complejos con fórmulas, formatos condicionales y estructura DGI requiere plan Pro o Teams. Asegúrate de estar en el modelo Sonnet o Opus para máxima calidad.</div></div>
-
-<div class="excel-guide">
-  <div class="card-title" style="color:#4ade80;margin-bottom:14px"><div class="card-icon icon-green">📋</div>Guía rápida: Tablas Excel con fórmulas auditables (Estilo DGI)</div>
-  <div class="prose" style="margin-bottom:12px"><p>Para obtener una tabla Excel estructurada con fórmulas auditables y alineada al estilo de trabajo de la DGI, usa este prompt estructurado:</p></div>
-  <div class="excel-prompt">Necesito que generes una tabla Excel en formato CSV con las siguientes especificaciones:
-
-PROPÓSITO: Registro de expedientes procesados por área — mes de [MES/AÑO]
+PROPÓSITO: Registro de expedientes — [MES/AÑO]
 
 COLUMNAS:
-- ID_Expediente (texto, formato: EXP-AAAA-NNN)
+- ID_Expediente (EXP-AAAA-NNN)
 - Área_Responsable (texto)
-- Fecha_Ingreso (fecha, DD/MM/AAAA)
-- Fecha_Cierre (fecha, DD/MM/AAAA)
-- Días_Hábiles (fórmula: NETWORKDAYS(C2,D2))
-- Estado (texto: Completado / En proceso / Pendiente)
-- Cumple_Plazo (fórmula: SI(E2<=15,"Sí","No"))
+- Fecha_Ingreso (DD/MM/AAAA)
+- Fecha_Cierre (DD/MM/AAAA)
+- Días_Hábiles (=DIAS.LAB(C2,D2))
+- Estado (Completado/En proceso/Pendiente)
+- Cumple_Plazo (=SI(E2<=15,"Sí","No"))
 
-TOTALES (fila al final):
-- COUNTA para expedientes
-- AVERAGE para días hábiles
-- COUNTIF para cumplimiento
+TOTALES: CONTARA, PROMEDIO, CONTAR.SI
 
-ESTILO: Encabezado con fondo oscuro (#1A0033) y texto blanco.
-Sin bordes en celdas de datos. Línea inferior en encabezado color #5A00AA.
-Gridlines desactivados. Altura de fila: 20pt.
+ESTILO DGI:
+- Header: fondo #1A0033, texto blanco
+- Línea inferior header: #5A00AA
+- Sin gridlines · Altura fila: 20pt
 
-Incluye 5 filas de ejemplo con datos ficticios pero realistas.
-Genera también los comentarios de auditoría en cada columna de fórmula.</div>
-</div>
+Incluye 5 filas ejemplo y comentarios de auditoría.</div></div>
+<div class="tip-pro"><div class="tip-label">💡 Para dashboards HTML</div><div class="tip-text">"Crea un artefacto HTML con 3 KPI cards (expedientes recibidos, procesados, pendientes) y gráfico de barras mensual en paleta DGI (#1A0033, #5A00AA, #9169FF)."</div></div>
+<div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>Especifica propósito, columnas tipadas y fórmulas en el prompt</li><li>Incluir estándares DGI garantiza consistencia visual</li><li>Los comentarios de auditoría facilitan revisión y mantenimiento</li></ul></div>`,
 
-<div class="content-card">
-  <div class="card-title"><div class="card-icon icon-violet">📊</div>Para visualizaciones en HTML</div>
-  <div class="tip-pro" style="margin-top:0"><div class="tip-label">Prompt para dashboard</div><div class="tip-text">"Crea un artefacto HTML con un dashboard de indicadores de gestión documental: 3 KPI cards en la parte superior (expedientes recibidos, procesados, pendientes), un gráfico de barras mensual con Chart.js usando la paleta de colores DGI (#1A0033, #5A00AA, #9169FF) y una tabla de últimas 5 actividades. Usa fondo blanco, tipografía Calibri."</div></div>
-</div>
-
-<div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>Especifica propósito, columnas tipadas y fórmulas exactas en el prompt</li><li>Incluir los estándares de estilo DGI en el prompt garantiza consistencia visual</li><li>Los comentarios de auditoría en fórmulas facilitan la revisión y mantenimiento</li></ul></div>`,
-
-  m2l4:()=>`
-<div class="lesson-eyebrow">Módulo 2 · Lección 3.4 <span class="premium-badge">PREMIUM</span></div>
+m2l4:`<div class="lesson-eyebrow">Módulo 2 · Lección 3.4 <span class="premium-badge">PREMIUM</span></div>
 <h1 class="lesson-h1">Claude para Google Chrome</h1>
-<p class="lesson-lead">La extensión Claude for Chrome convierte al navegador en un entorno de trabajo aumentado. Claude puede ver lo que tú ves y asistirte sin cambiar de pestaña.</p>
-<div class="premium-card"><div class="premium-label">⭐ Función Premium</div><div class="tip-text">Claude for Chrome requiere plan Pro o Teams activo en tu cuenta de Anthropic.</div></div>
-<div class="content-card">
-  <div class="card-title"><div class="card-icon icon-violet">🔌</div>Instalación paso a paso</div>
-  <div class="steps">
-    <div class="step"><div class="step-num">1</div><div class="step-body">Accede a <strong>Chrome Web Store</strong> → busca "Claude for Chrome" de Anthropic.</div></div>
-    <div class="step"><div class="step-num">2</div><div class="step-body">Clic en <strong>"Añadir a Chrome"</strong> → confirma permisos de lectura de página activa.</div></div>
-    <div class="step"><div class="step-num">3</div><div class="step-body">Inicia sesión con tu cuenta de Anthropic Pro desde el popup de la extensión.</div></div>
-    <div class="step"><div class="step-num">4</div><div class="step-body">Activa la barra lateral con el ícono de Claude en la barra de extensiones.</div></div>
-  </div>
-</div>
-<div class="content-card">
-  <div class="card-title"><div class="card-icon icon-orange">💼</div>Casos de uso para la DGI</div>
-  <div class="list-items">
-    <div class="list-item"><div class="list-dot"></div><span><strong>Resumir normativas:</strong> Abre el PDF de una norma en Chrome → "Resume los artículos relevantes para gestión documental".</span></div>
-    <div class="list-item"><div class="list-dot"></div><span><strong>Extraer datos de páginas web:</strong> En cualquier portal institucional, extrae tablas o información estructurada con un prompt.</span></div>
-    <div class="list-item"><div class="list-dot"></div><span><strong>Redactar respuestas:</strong> Con un correo abierto, pide a Claude que redacte una respuesta formal basada en el contenido visible.</span></div>
-  </div>
-</div>
-<div class="tip-pro"><div class="tip-label">💡 Tip Pro</div><div class="tip-text">Usa el atajo de teclado <strong>Ctrl+Shift+C</strong> (Windows) para abrir la barra lateral de Claude sin mover el mouse. Ideal cuando lees documentos extensos y necesitas consultas rápidas.</div></div>
-<div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>Claude for Chrome lee la página activa y te asiste desde la barra lateral</li><li>Ideal para resumir normativas, extraer datos y redactar en contexto</li><li>Requiere plan Pro y autorización de permisos de lectura</li></ul></div>`,
+<p class="lesson-lead">La extensión convierte al navegador en un entorno de trabajo aumentado. Claude ve lo que tú ves y asiste desde la barra lateral.</p>
+<div class="content-card"><div class="card-title"><div class="card-icon icon-violet">🔌</div>Instalación</div><div class="steps"><div class="step"><div class="step-num">1</div><div class="step-body">Chrome Web Store → busca <strong>"Claude for Chrome"</strong> de Anthropic.</div></div><div class="step"><div class="step-num">2</div><div class="step-body">Añadir a Chrome → confirma permisos de lectura de página activa.</div></div><div class="step"><div class="step-num">3</div><div class="step-body">Inicia sesión con tu cuenta Anthropic Pro.</div></div><div class="step"><div class="step-num">4</div><div class="step-body">Activa la barra lateral desde el ícono de Claude en extensiones.</div></div></div></div>
+<div class="content-card"><div class="card-title"><div class="card-icon icon-orange">💼</div>Casos de uso DGI</div><div class="list-items"><div class="list-item"><div class="list-dot"></div><span><strong>Resumir normativas:</strong> Abre el PDF → "Resume los artículos relevantes para gestión documental".</span></div><div class="list-item"><div class="list-dot"></div><span><strong>Extraer datos:</strong> En portales institucionales, extrae tablas o información estructurada.</span></div><div class="list-item"><div class="list-dot"></div><span><strong>Redactar respuestas:</strong> Con un correo abierto, Claude redacta basándose en el contenido visible.</span></div></div></div>
+<div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>Claude for Chrome lee la página activa y asiste desde la barra lateral</li><li>Ideal para resumir normativas, extraer datos y redactar en contexto</li><li>Requiere plan Pro y permisos de lectura de página</li></ul></div>`,
 
-  m2l5:()=>`
-<div class="lesson-eyebrow">Módulo 2 · Lección 3.5 <span class="premium-badge">PREMIUM</span></div>
-<h1 class="lesson-h1">Claude para MS Office: Instalación</h1>
-<p class="lesson-lead">La integración nativa de Claude con Word, Excel y PowerPoint elimina el cambio constante entre aplicaciones. Claude opera directamente dentro de Office.</p>
-<div class="premium-card"><div class="premium-label">⭐ Función Premium</div><div class="tip-text">Requiere Microsoft 365 activo y plan Claude Pro o Teams. El complemento está disponible en versiones de escritorio y web de Office.</div></div>
-<div class="content-card">
-  <div class="card-title"><div class="card-icon icon-violet">📥</div>Instalación en Microsoft Word / Excel</div>
-  <div class="steps">
-    <div class="step"><div class="step-num">1</div><div class="step-body">Abre Word o Excel → pestaña <strong>Insertar</strong> → <strong>Complementos de Office</strong> → Obtener complementos.</div></div>
-    <div class="step"><div class="step-num">2</div><div class="step-body">Busca <strong>"Claude for Microsoft 365"</strong> en la tienda de complementos → clic en Agregar.</div></div>
-    <div class="step"><div class="step-num">3</div><div class="step-body">Aparecerá el panel lateral de Claude en el lado derecho de la aplicación.</div></div>
-    <div class="step"><div class="step-num">4</div><div class="step-body">Inicia sesión con tu cuenta Anthropic → autoriza el acceso al documento activo.</div></div>
-    <div class="step"><div class="step-num">5</div><div class="step-body">Verifica la instalación: selecciona un texto en el documento y consulta a Claude sobre él.</div></div>
-  </div>
-</div>
-<div class="tip-pro"><div class="tip-label">💡 Tip Pro</div><div class="tip-text">Si tu organización usa Microsoft 365 administrado por TI, solicita al área de sistemas que apruebe el complemento en el portal de administración de M365. Sin esta aprobación, los usuarios no podrán instalarlo individualmente.</div></div>
-<div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>La instalación es desde la tienda de complementos de Office, no requiere instalador externo</li><li>En entornos corporativos M365, requiere aprobación del administrador de TI</li><li>El panel lateral da acceso a Claude sin salir de Word, Excel o PowerPoint</li></ul></div>`,
+m2l5:`<div class="lesson-eyebrow">Módulo 2 · Lección 3.5 <span class="premium-badge">PREMIUM</span></div>
+<h1 class="lesson-h1">MS Office: Instalación</h1>
+<p class="lesson-lead">La integración nativa con Word, Excel y PowerPoint elimina el cambio constante entre aplicaciones.</p>
+<div class="content-card"><div class="card-title"><div class="card-icon icon-violet">📥</div>Instalación</div><div class="steps"><div class="step"><div class="step-num">1</div><div class="step-body">Word/Excel → <strong>Insertar → Complementos de Office → Obtener complementos.</strong></div></div><div class="step"><div class="step-num">2</div><div class="step-body">Busca <strong>"Claude for Microsoft 365"</strong> → Agregar.</div></div><div class="step"><div class="step-num">3</div><div class="step-body">El panel lateral de Claude aparece en el lado derecho.</div></div><div class="step"><div class="step-num">4</div><div class="step-body">Inicia sesión con tu cuenta Anthropic → autoriza acceso al documento activo.</div></div></div></div>
+<div class="tip-pro"><div class="tip-label">💡 Entornos corporativos M365</div><div class="tip-text">En M365 administrado por TI, solicita que el área de sistemas apruebe el complemento en el portal de administración. Sin esa aprobación, los usuarios no podrán instalarlo individualmente.</div></div>
+<div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>Instalación desde la tienda de complementos de Office, sin instalador externo</li><li>En entornos corporativos M365, requiere aprobación del administrador TI</li><li>El panel lateral da acceso sin salir de Word, Excel o PowerPoint</li></ul></div>`,
 
-  m2l6:()=>`
-<div class="lesson-eyebrow">Módulo 2 · Lección 3.6 <span class="premium-badge">PREMIUM</span></div>
-<h1 class="lesson-h1">Claude para MS Office: Casos de uso</h1>
-<p class="lesson-lead">Con Claude integrado en Office, los documentos dejan de ser estáticos. Claude puede generar, revisar, reestructurar y explicar el contenido directamente en tu entorno de trabajo.</p>
-<div class="content-card">
-  <div class="card-title"><div class="card-icon icon-orange">📝</div>Word: Casos DGI</div>
-  <div class="list-items">
-    <div class="list-item"><div class="list-dot"></div><span><strong>Revisión de estilo institucional:</strong> Selecciona el documento → "Revisa el tono formal, consistencia terminológica y estructura de este informe según los estándares DGI".</span></div>
-    <div class="list-item"><div class="list-dot"></div><span><strong>Generar secciones:</strong> "Redacta la sección de conclusiones basándote en el contenido del documento abierto".</span></div>
-    <div class="list-item"><div class="list-dot"></div><span><strong>Resúmenes ejecutivos:</strong> "Genera un resumen ejecutivo de 150 palabras del informe actual".</span></div>
-  </div>
-</div>
-<div class="content-card">
-  <div class="card-title"><div class="card-icon icon-violet">📊</div>Excel: Casos DGI</div>
-  <div class="list-items">
-    <div class="list-item"><div class="list-dot"></div><span><strong>Explicar fórmulas:</strong> Selecciona una celda con fórmula compleja → "Explica paso a paso qué hace esta fórmula y cómo modificarla para incluir el mes anterior".</span></div>
-    <div class="list-item"><div class="list-dot"></div><span><strong>Generar fórmulas:</strong> "Crea una fórmula que calcule el promedio de días de respuesta excluyendo los outliers mayores a 30 días".</span></div>
-    <div class="list-item"><div class="list-dot"></div><span><strong>Detectar anomalías:</strong> "Analiza esta tabla y señala filas donde los datos parecen inconsistentes o fuera de rango".</span></div>
-  </div>
-</div>
-<div class="tip-pro"><div class="tip-label">💡 Tip Pro: Contexto siempre activo</div><div class="tip-text">Claude en Office tiene acceso al documento completo, no solo a lo seleccionado. Puedes preguntar "¿hay inconsistencias entre la introducción y las conclusiones?" sin seleccionar nada — Claude lee el documento completo.</div></div>
-<div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>En Word: revisión de estilo, generación de secciones y resúmenes ejecutivos</li><li>En Excel: explicación y generación de fórmulas, detección de anomalías</li><li>Claude lee el documento completo, no solo el texto seleccionado</li></ul></div>`,
+m2l6:`<div class="lesson-eyebrow">Módulo 2 · Lección 3.6 <span class="premium-badge">PREMIUM</span></div>
+<h1 class="lesson-h1">MS Office: Casos de uso</h1>
+<p class="lesson-lead">Con Claude integrado, los documentos dejan de ser estáticos. Genera, revisa, reestructura y explica contenido directamente en tu app.</p>
+<div class="content-card"><div class="card-title"><div class="card-icon icon-orange">📝</div>Word: Casos DGI</div><div class="list-items"><div class="list-item"><div class="list-dot"></div><span><strong>Revisión de estilo:</strong> "Revisa tono formal y consistencia terminológica según estándares DGI".</span></div><div class="list-item"><div class="list-dot"></div><span><strong>Generar secciones:</strong> "Redacta las conclusiones basándote en el documento abierto".</span></div><div class="list-item"><div class="list-dot"></div><span><strong>Resúmenes ejecutivos:</strong> "Genera un resumen de 150 palabras del informe actual".</span></div></div></div>
+<div class="content-card"><div class="card-title"><div class="card-icon icon-violet">📊</div>Excel: Casos DGI</div><div class="list-items"><div class="list-item"><div class="list-dot"></div><span><strong>Explicar fórmulas:</strong> Selecciona celda → "Explica qué hace esta fórmula y cómo modificarla".</span></div><div class="list-item"><div class="list-dot"></div><span><strong>Detectar anomalías:</strong> "Señala filas con datos inconsistentes o fuera de rango".</span></div></div></div>
+<div class="tip-pro"><div class="tip-label">💡 Contexto completo</div><div class="tip-text">Claude lee el documento completo, no solo el texto seleccionado. Puedes preguntar "¿hay inconsistencias entre la introducción y las conclusiones?" sin seleccionar nada.</div></div>
+<div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>Word: revisión de estilo, generación de secciones y resúmenes ejecutivos</li><li>Excel: explicación de fórmulas, generación y detección de anomalías</li><li>Claude lee el documento completo, no solo el texto seleccionado</li></ul></div>`,
 
-  m3l1:()=>`
-<div class="lesson-eyebrow">Módulo 3 · Lección 4.1 <span class="premium-badge">PREMIUM</span></div>
-<h1 class="lesson-h1">¿Qué son las Skills?</h1>
-<p class="lesson-lead">Las Skills son instrucciones, conocimientos o comportamientos encapsulados que convierten a Claude en un especialista personalizado. En lugar de repetir el mismo contexto en cada conversación, defines la especialización una vez y la usas siempre.</p>
-<div class="content-card">
-  <div class="card-title"><div class="card-icon icon-violet">🧩</div>Anatomía de una Skill</div>
-  <div class="list-items">
-    <div class="list-item"><div class="list-dot"></div><span><strong>Instrucciones del sistema:</strong> Define el rol, restricciones y comportamiento base de Claude para este contexto.</span></div>
-    <div class="list-item"><div class="list-dot"></div><span><strong>Conocimiento de referencia:</strong> Documentos, glosarios o datos que Claude debe tener siempre disponibles.</span></div>
-    <div class="list-item"><div class="list-dot"></div><span><strong>Ejemplos de formato:</strong> Modelos de respuesta para que Claude replique la estructura y estilo esperado.</span></div>
-  </div>
-</div>
-<div class="tip-pro"><div class="tip-label">💡 Tip Pro</div><div class="tip-text">Piensa en las Skills como "perfiles de trabajo" para Claude. Una Skill llamada "Analista DGI" tiene el contexto institucional, terminología y formato de informes de tu área. Una llamada "Redactor Normativo" tiene el estilo legal y referencias específicas. Cambias de Skill como cambias de herramienta.</div></div>
-<div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>Las Skills encapsulan rol, conocimiento y formato en un perfil reutilizable</li><li>Eliminan la necesidad de repetir contexto en cada conversación</li><li>Cada área de la DGI puede tener su propia Skill especializada</li></ul></div>`,
+m3l1:`<div class="lesson-eyebrow">Módulo 3 · Lección 4.1 <span class="premium-badge">PREMIUM</span></div><h1 class="lesson-h1">¿Qué son las Skills?</h1><p class="lesson-lead">Las Skills son instrucciones encapsuladas que convierten a Claude en un especialista personalizado. Defines la especialización una vez y la usas siempre.</p><div class="content-card"><div class="card-title"><div class="card-icon icon-violet">🧩</div>Anatomía de una Skill</div><div class="list-items"><div class="list-item"><div class="list-dot"></div><span><strong>Instrucciones del sistema:</strong> Rol, restricciones y comportamiento base de Claude.</span></div><div class="list-item"><div class="list-dot"></div><span><strong>Conocimiento de referencia:</strong> Documentos y glosarios siempre disponibles.</span></div><div class="list-item"><div class="list-dot"></div><span><strong>Ejemplos de formato:</strong> Modelos de respuesta que Claude replica.</span></div></div></div><div class="tip-pro"><div class="tip-label">💡 Skills como perfiles de trabajo</div><div class="tip-text">Una Skill "Analista DGI" tiene contexto institucional y formato de informes. Una "Redactor Normativo" tiene el estilo legal. Cambias de Skill como cambias de herramienta.</div></div><div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>Las Skills encapsulan rol, conocimiento y formato en perfil reutilizable</li><li>Eliminan la necesidad de repetir contexto en cada conversación</li><li>Cada área DGI puede tener su propia Skill especializada</li></ul></div>`,
 
-  m3l2:()=>`
-<div class="lesson-eyebrow">Módulo 3 · Lección 4.2 <span class="premium-badge">PREMIUM</span></div>
-<h1 class="lesson-h1">Instalar y usar Skills</h1>
-<p class="lesson-lead">Las Skills se pueden descubrir en la biblioteca de Claude, instalar con un clic y activar desde cualquier conversación. También puedes importar Skills creadas por tu equipo.</p>
-<div class="content-card">
-  <div class="card-title"><div class="card-icon icon-orange">⬇️</div>Instalar una Skill de la biblioteca</div>
-  <div class="steps">
-    <div class="step"><div class="step-num">1</div><div class="step-body">Accede a <strong>claude.ai → Skills</strong> en el menú lateral.</div></div>
-    <div class="step"><div class="step-num">2</div><div class="step-body">Explora la biblioteca por categoría (Productividad, Análisis, Redacción, Código).</div></div>
-    <div class="step"><div class="step-num">3</div><div class="step-body">Selecciona la Skill → <strong>"Instalar"</strong> → aparece en tu biblioteca personal.</div></div>
-    <div class="step"><div class="step-num">4</div><div class="step-body">Para activarla en una conversación: escribe <strong>@NombreSkill</strong> en el chat o selecciónala desde el selector de Skills.</div></div>
-  </div>
-</div>
-<div class="tip-pro"><div class="tip-label">💡 Tip Pro</div><div class="tip-text">Puedes activar múltiples Skills en una misma conversación usando @Skill1 @Skill2. Claude combinará ambos contextos. Útil cuando necesitas, por ejemplo, el conocimiento normativo de "DGI Legal" con el formato de "Redactor Ejecutivo".</div></div>
-<div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>Skills disponibles en biblioteca oficial y compartidas por el equipo</li><li>Se activan con @NombreSkill en cualquier conversación</li><li>Es posible combinar múltiples Skills simultáneamente</li></ul></div>`,
+m3l2:`<div class="lesson-eyebrow">Módulo 3 · Lección 4.2 <span class="premium-badge">PREMIUM</span></div><h1 class="lesson-h1">Instalar y usar Skills</h1><p class="lesson-lead">Las Skills se descubren en la biblioteca, se instalan con un clic y se activan con @NombreSkill desde cualquier conversación.</p><div class="content-card"><div class="card-title"><div class="card-icon icon-orange">⬇️</div>Instalar una Skill</div><div class="steps"><div class="step"><div class="step-num">1</div><div class="step-body">claude.ai → <strong>Skills</strong> en el menú lateral.</div></div><div class="step"><div class="step-num">2</div><div class="step-body">Explora por categoría: Productividad, Análisis, Redacción, Código.</div></div><div class="step"><div class="step-num">3</div><div class="step-body">Selecciona → <strong>"Instalar"</strong> → queda en tu biblioteca personal.</div></div><div class="step"><div class="step-num">4</div><div class="step-body">Para activar: escribe <strong>@NombreSkill</strong> en el chat.</div></div></div></div><div class="tip-pro"><div class="tip-label">💡 Skills combinadas</div><div class="tip-text">Puedes activar múltiples Skills con @Skill1 @Skill2. Claude combina ambos contextos. Útil para combinar conocimiento normativo con formato ejecutivo.</div></div><div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>Skills disponibles en biblioteca oficial y compartidas por el equipo</li><li>Se activan con @NombreSkill en cualquier conversación</li><li>Es posible combinar múltiples Skills simultáneamente</li></ul></div>`,
 
-  m3l3:()=>`
-<div class="lesson-eyebrow">Módulo 3 · Lección 4.3 <span class="premium-badge">PREMIUM</span></div>
-<h1 class="lesson-h1">Cómo funcionan tus habilidades</h1>
-<p class="lesson-lead">Cuando activas una Skill, Claude recibe el contexto encapsulado en esa habilidad antes de tu mensaje. Es como darle un briefing completo instantáneo antes de cada conversación.</p>
-<div class="content-card">
-  <div class="card-title"><div class="card-icon icon-violet">🔄</div>Flujo técnico de una Skill activa</div>
-  <div class="list-items">
-    <div class="list-item"><div class="list-dot"></div><span><strong>1. Activación:</strong> Mencionas @Skill en el chat o la seleccionas en el selector.</span></div>
-    <div class="list-item"><div class="list-dot"></div><span><strong>2. Inyección de contexto:</strong> Las instrucciones y documentos de la Skill se prependen automáticamente a la conversación.</span></div>
-    <div class="list-item"><div class="list-dot"></div><span><strong>3. Respuesta especializada:</strong> Claude responde con el rol, tono y formato definido en la Skill, aplicado a tu consulta específica.</span></div>
-    <div class="list-item"><div class="list-dot"></div><span><strong>4. Persistencia:</strong> La Skill permanece activa durante toda la conversación, no solo en el primer mensaje.</span></div>
-  </div>
-</div>
-<div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>La Skill inyecta contexto antes de cada respuesta de forma transparente</li><li>Persiste durante toda la conversación una vez activada</li><li>El resultado: Claude especializado sin esfuerzo de setup</li></ul></div>`,
+m3l3:`<div class="lesson-eyebrow">Módulo 3 · Lección 4.3 <span class="premium-badge">PREMIUM</span></div><h1 class="lesson-h1">Cómo funcionan las habilidades</h1><p class="lesson-lead">Cuando activas una Skill, Claude recibe su contexto antes de tu mensaje. Un briefing completo instantáneo.</p><div class="content-card"><div class="card-title"><div class="card-icon icon-violet">🔄</div>Flujo técnico</div><div class="list-items"><div class="list-item"><div class="list-dot"></div><span><strong>1. Activación:</strong> Mencionas @Skill o la seleccionas en el selector.</span></div><div class="list-item"><div class="list-dot"></div><span><strong>2. Inyección:</strong> Instrucciones y documentos se prependen automáticamente.</span></div><div class="list-item"><div class="list-dot"></div><span><strong>3. Respuesta:</strong> Claude responde con el rol, tono y formato definidos.</span></div><div class="list-item"><div class="list-dot"></div><span><strong>4. Persistencia:</strong> La Skill permanece activa durante toda la conversación.</span></div></div></div><div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>La Skill inyecta contexto de forma transparente antes de cada respuesta</li><li>Persiste durante toda la conversación una vez activada</li><li>Claude especializado sin esfuerzo de configuración manual</li></ul></div>`,
 
-  m3l4:()=>`
-<div class="lesson-eyebrow">Módulo 3 · Lección 4.4 <span class="premium-badge">PREMIUM</span></div>
-<h1 class="lesson-h1">Crear tu propia Skill</h1>
-<p class="lesson-lead">Crear una Skill personalizada para la DGI es el paso que convierte a Claude en un miembro funcional de tu equipo, con el conocimiento institucional y los estándares de tu organización.</p>
-<div class="content-card">
-  <div class="card-title"><div class="card-icon icon-orange">🛠️</div>Crear Skill paso a paso</div>
-  <div class="steps">
-    <div class="step"><div class="step-num">1</div><div class="step-body">Skills → <strong>"Nueva Skill"</strong> → Asigna nombre y descripción clara ("Analista de Gestión Documental DGI").</div></div>
-    <div class="step"><div class="step-num">2</div><div class="step-body">Redacta las <strong>instrucciones del sistema</strong>: rol, restricciones, formato de respuesta esperado. Sé específico.</div></div>
-    <div class="step"><div class="step-num">3</div><div class="step-body">Adjunta <strong>documentos de referencia</strong>: normativas, plantillas, glosario institucional.</div></div>
-    <div class="step"><div class="step-num">4</div><div class="step-body">Añade <strong>ejemplos de respuesta</strong> (few-shot): muestra a Claude cómo quieres que se vea una respuesta ideal.</div></div>
-    <div class="step"><div class="step-num">5</div><div class="step-body"><strong>Prueba y ajusta:</strong> Activa la Skill en una conversación de prueba → evalúa si responde según lo esperado → refina las instrucciones.</div></div>
-  </div>
-</div>
-<div class="tip-pro"><div class="tip-label">💡 Tip Pro: Instrucciones efectivas</div><div class="tip-text">Las instrucciones más efectivas siguen el patrón: <strong>ROL</strong> ("Eres un analista de gestión documental") + <strong>CONTEXTO</strong> ("Trabajas para la DGI de [institución]") + <strong>RESTRICCIONES</strong> ("Siempre cita el artículo normativo relevante") + <strong>FORMATO</strong> ("Responde con: Análisis, Riesgo identificado, Recomendación").</div></div>
-<div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>Estructura: nombre → instrucciones → documentos → ejemplos → prueba</li><li>El patrón ROL + CONTEXTO + RESTRICCIONES + FORMATO produce las mejores instrucciones</li><li>Itera sobre las instrucciones hasta que la Skill se comporte de forma consistente</li></ul></div>`,
+m3l4:`<div class="lesson-eyebrow">Módulo 3 · Lección 4.4 <span class="premium-badge">PREMIUM</span></div><h1 class="lesson-h1">Crear tu propia Skill</h1><p class="lesson-lead">Crear una Skill para la DGI convierte a Claude en un miembro funcional con el conocimiento institucional de tu organización.</p><div class="content-card"><div class="card-title"><div class="card-icon icon-orange">🛠️</div>Crear Skill paso a paso</div><div class="steps"><div class="step"><div class="step-num">1</div><div class="step-body">Skills → <strong>"Nueva Skill"</strong> → Nombre y descripción.</div></div><div class="step"><div class="step-num">2</div><div class="step-body"><strong>Instrucciones:</strong> Rol, restricciones y formato de respuesta. Sé específico.</div></div><div class="step"><div class="step-num">3</div><div class="step-body"><strong>Documentos:</strong> Normativas, plantillas, glosario institucional.</div></div><div class="step"><div class="step-num">4</div><div class="step-body"><strong>Ejemplos few-shot:</strong> Muestra a Claude cómo se ve una respuesta ideal.</div></div><div class="step"><div class="step-num">5</div><div class="step-body"><strong>Prueba y ajusta</strong> hasta comportamiento consistente.</div></div></div></div><div class="tip-pro"><div class="tip-label">💡 Patrón de instrucciones</div><div class="tip-text"><strong>ROL</strong> + <strong>CONTEXTO</strong> + <strong>RESTRICCIONES</strong> + <strong>FORMATO</strong>. Ejemplo: "Eres analista DGI. Siempre cita el artículo normativo. Responde con: Análisis, Riesgo, Recomendación."</div></div><div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>Estructura: nombre → instrucciones → documentos → ejemplos → prueba</li><li>El patrón ROL+CONTEXTO+RESTRICCIONES+FORMATO produce las mejores instrucciones</li><li>Itera hasta que la Skill se comporte de forma consistente</li></ul></div>`,
 
-  m3l5:()=>`
-<div class="lesson-eyebrow">Módulo 3 · Lección 4.5 <span class="premium-badge">PREMIUM</span></div>
-<h1 class="lesson-h1">Editar habilidades</h1>
-<p class="lesson-lead">Las Skills evolucionan con tu práctica. Editar una Skill te permite refinarla, añadir conocimiento actualizado y corregir comportamientos no deseados sin crear una nueva desde cero.</p>
-<div class="content-card">
-  <div class="card-title"><div class="card-icon icon-violet">✏️</div>Editar una Skill existente</div>
-  <div class="steps">
-    <div class="step"><div class="step-num">1</div><div class="step-body">Skills → selecciona la Skill → ícono de <strong>editar (lápiz)</strong>.</div></div>
-    <div class="step"><div class="step-num">2</div><div class="step-body">Modifica las instrucciones, actualiza documentos o añade nuevos ejemplos de respuesta.</div></div>
-    <div class="step"><div class="step-num">3</div><div class="step-body">Guarda cambios → la versión actualizada se aplica a partir de la siguiente conversación donde se active.</div></div>
-  </div>
-</div>
-<div class="tip-pro"><div class="tip-label">💡 Tip Pro: Versionado</div><div class="tip-text">Antes de editar una Skill que ya funciona bien, crea una copia con el sufijo "_v2". Así puedes comparar el comportamiento de ambas versiones y revertir si los cambios no producen mejoras.</div></div>
-<div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>Las ediciones se aplican a nuevas conversaciones, no a las activas</li><li>Hacer copias versionadas antes de editar evita pérdidas de configuraciones que funcionaban bien</li><li>Refinar iterativamente las instrucciones es la clave para Skills de alta precisión</li></ul></div>`,
+m3l5:`<div class="lesson-eyebrow">Módulo 3 · Lección 4.5 <span class="premium-badge">PREMIUM</span></div><h1 class="lesson-h1">Editar habilidades</h1><p class="lesson-lead">Las Skills evolucionan con tu práctica. Edítalas para añadir conocimiento actualizado sin crear una nueva desde cero.</p><div class="content-card"><div class="card-title"><div class="card-icon icon-violet">✏️</div>Editar una Skill</div><div class="steps"><div class="step"><div class="step-num">1</div><div class="step-body">Skills → selecciona la Skill → ícono de <strong>lápiz</strong>.</div></div><div class="step"><div class="step-num">2</div><div class="step-body">Modifica instrucciones, actualiza documentos o añade ejemplos.</div></div><div class="step"><div class="step-num">3</div><div class="step-body">Guarda → aplica en la siguiente conversación donde se active.</div></div></div></div><div class="tip-pro"><div class="tip-label">💡 Versionado</div><div class="tip-text">Antes de editar una Skill que funciona bien, crea una copia con sufijo "_v2". Compara comportamientos y revierte si los cambios no mejoran.</div></div><div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>Las ediciones aplican a nuevas conversaciones, no a las activas</li><li>Copias versionadas evitan pérdidas de configuraciones que funcionaban</li><li>Refinar iterativamente las instrucciones es clave para alta precisión</li></ul></div>`,
 
-  m3l6:()=>`
-<div class="lesson-eyebrow">Módulo 3 · Lección 4.6 <span class="premium-badge">PREMIUM</span></div>
-<h1 class="lesson-h1">Personalizar habilidades</h1>
-<p class="lesson-lead">La personalización avanzada de Skills incluye variables dinámicas, comportamientos condicionales y configuración de tono que adaptan a Claude a situaciones específicas dentro de la misma habilidad.</p>
-<div class="content-card">
-  <div class="card-title"><div class="card-icon icon-orange">⚡</div>Técnicas de personalización avanzada</div>
-  <div class="list-items">
-    <div class="list-item"><div class="list-dot"></div><span><strong>Variables dinámicas:</strong> Usa placeholders como [AREA] o [TIPO_DOCUMENTO] en las instrucciones que el usuario completa al activar la Skill.</span></div>
-    <div class="list-item"><div class="list-dot"></div><span><strong>Reglas condicionales:</strong> "Si el documento es normativo, cita artículos. Si es operativo, usa viñetas y pasos numerados."</span></div>
-    <div class="list-item"><div class="list-dot"></div><span><strong>Niveles de formalidad:</strong> Define cuándo Claude debe usar lenguaje técnico vs. lenguaje ejecutivo según el contexto del prompt.</span></div>
-  </div>
-</div>
-<div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>Variables dinámicas hacen la Skill adaptable a múltiples contextos</li><li>Reglas condicionales en las instrucciones aumentan la precisión situacional</li><li>La personalización avanzada convierte una Skill en un sistema de respuesta inteligente</li></ul></div>`,
+m3l6:`<div class="lesson-eyebrow">Módulo 3 · Lección 4.6 <span class="premium-badge">PREMIUM</span></div><h1 class="lesson-h1">Personalizar habilidades</h1><p class="lesson-lead">La personalización avanzada incluye variables dinámicas, comportamientos condicionales y niveles de formalidad por contexto.</p><div class="content-card"><div class="card-title"><div class="card-icon icon-orange">⚡</div>Técnicas avanzadas</div><div class="list-items"><div class="list-item"><div class="list-dot"></div><span><strong>Variables dinámicas:</strong> Placeholders como [AREA] o [TIPO_DOCUMENTO] que el usuario completa al activar.</span></div><div class="list-item"><div class="list-dot"></div><span><strong>Reglas condicionales:</strong> "Si el documento es normativo, cita artículos. Si es operativo, usa pasos numerados."</span></div><div class="list-item"><div class="list-dot"></div><span><strong>Niveles de formalidad:</strong> Define cuándo usar lenguaje técnico vs. ejecutivo según el contexto del prompt.</span></div></div></div><div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>Variables dinámicas hacen la Skill adaptable a múltiples contextos</li><li>Reglas condicionales aumentan la precisión situacional</li><li>La personalización avanzada convierte una Skill en un sistema de respuesta inteligente</li></ul></div>`,
 
-  m3l7:()=>`
-<div class="lesson-eyebrow">Módulo 3 · Lección 4.7 <span class="premium-badge">PREMIUM</span></div>
-<h1 class="lesson-h1">¿Qué son los Conectores?</h1>
-<p class="lesson-lead">Los Conectores (basados en el Model Context Protocol, MCP) permiten a Claude acceder y actuar sobre herramientas externas en tiempo real: bases de datos, almacenamiento en nube, sistemas de gestión y más.</p>
-<div class="content-card">
-  <div class="card-title"><div class="card-icon icon-violet">🔗</div>Conectores disponibles para la DGI</div>
-  <div class="apps-grid">
-    <div class="app-card"><div class="app-card-title">☁️ Google Drive</div><div class="app-card-desc">Busca, lee y crea archivos directamente desde el chat</div></div>
-    <div class="app-card"><div class="app-card-title">📧 Gmail / Outlook</div><div class="app-card-desc">Lee y redacta correos con contexto de la conversación</div></div>
-    <div class="app-card"><div class="app-card-title">📋 Notion / Confluence</div><div class="app-card-desc">Actualiza bases de conocimiento institucional</div></div>
-    <div class="app-card"><div class="app-card-title">✅ Asana / Trello</div><div class="app-card-desc">Crea y gestiona tareas desde el contexto del chat</div></div>
-  </div>
-</div>
-<div class="tip-pro"><div class="tip-label">💡 Tip Pro</div><div class="tip-text">Los Conectores convierten a Claude de asistente conversacional en agente de acción. Con Google Drive conectado, puedes pedir: "Busca todos los informes de gestión del Q1 en mi Drive y genera un resumen comparativo" — Claude ejecuta la búsqueda y el análisis en un solo paso.</div></div>
-<div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>Los Conectores amplían a Claude con acceso a herramientas externas reales</li><li>Basados en el protocolo abierto MCP de Anthropic</li><li>Habilitan acciones concretas: buscar, leer, crear, actualizar en sistemas externos</li></ul></div>`,
+m3l7:`<div class="lesson-eyebrow">Módulo 3 · Lección 4.7 <span class="premium-badge">PREMIUM</span></div><h1 class="lesson-h1">¿Qué son los Conectores?</h1><p class="lesson-lead">Los Conectores (MCP) permiten a Claude acceder y actuar sobre herramientas externas en tiempo real: bases de datos, nube, sistemas de gestión y más.</p><div class="apps-grid"><div class="app-card"><div class="app-card-title">☁️ Google Drive</div><div class="app-card-desc">Busca, lee y crea archivos desde el chat</div></div><div class="app-card"><div class="app-card-title">📧 Gmail/Outlook</div><div class="app-card-desc">Lee y redacta correos con contexto</div></div><div class="app-card"><div class="app-card-title">📋 Notion</div><div class="app-card-desc">Actualiza bases de conocimiento</div></div><div class="app-card"><div class="app-card-title">✅ Asana/Trello</div><div class="app-card-desc">Crea y gestiona tareas desde el chat</div></div></div><div class="tip-pro"><div class="tip-label">💡 Tip Pro</div><div class="tip-text">Con Drive conectado: "Busca todos los informes Q1 y genera un resumen comparativo" — Claude ejecuta la búsqueda y el análisis en un solo paso.</div></div><div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>Conectores = acceso a herramientas externas reales vía MCP</li><li>Habilitan acciones concretas: buscar, leer, crear, actualizar en sistemas externos</li><li>Se configuran en Configuración → Conectores</li></ul></div>`,
 
-  m3l8:()=>`
-<div class="lesson-eyebrow">Módulo 3 · Lección 4.8 <span class="premium-badge">PREMIUM</span></div>
-<h1 class="lesson-h1">Complementos personales</h1>
-<p class="lesson-lead">Los complementos personales son conectores MCP configurados para acceder a tus propios repositorios, sistemas o APIs institucionales, más allá de las integraciones predefinidas.</p>
-<div class="content-card">
-  <div class="card-title"><div class="card-icon icon-orange">🔧</div>Configurar un complemento personal</div>
-  <div class="steps">
-    <div class="step"><div class="step-num">1</div><div class="step-body">Accede a <strong>Configuración → Conectores → Añadir MCP personalizado</strong>.</div></div>
-    <div class="step"><div class="step-num">2</div><div class="step-body">Proporciona la URL del servidor MCP de tu sistema o el comando de inicio si es local.</div></div>
-    <div class="step"><div class="step-num">3</div><div class="step-body">Configura credenciales de acceso (API key, OAuth o autenticación básica).</div></div>
-    <div class="step"><div class="step-num">4</div><div class="step-body">Prueba la conexión → verifica qué herramientas expone el servidor MCP.</div></div>
-  </div>
-</div>
-<div class="tip-pro"><div class="tip-label">💡 Tip Pro DGI</div><div class="tip-text">Si la DGI cuenta con un sistema de gestión documental propio con API, un servidor MCP puede exponerlo a Claude. Esto permite consultas en lenguaje natural al repositorio institucional: "¿Cuáles son los expedientes pendientes de cierre de esta semana?" — Claude consulta el sistema real.</div></div>
-<div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>Los complementos personales conectan Claude con sistemas propios via MCP</li><li>Requieren configuración técnica: URL del servidor MCP y credenciales</li><li>Habilitan acceso en lenguaje natural a repositorios institucionales propios</li></ul></div>`,
+m3l8:`<div class="lesson-eyebrow">Módulo 3 · Lección 4.8 <span class="premium-badge">PREMIUM</span></div><h1 class="lesson-h1">Complementos personales</h1><p class="lesson-lead">Conectores MCP configurados para tus propios repositorios o APIs institucionales, más allá de las integraciones predefinidas.</p><div class="content-card"><div class="card-title"><div class="card-icon icon-orange">🔧</div>Configurar complemento personal</div><div class="steps"><div class="step"><div class="step-num">1</div><div class="step-body">Configuración → <strong>Conectores → Añadir MCP personalizado.</strong></div></div><div class="step"><div class="step-num">2</div><div class="step-body">URL del servidor MCP o comando de inicio local.</div></div><div class="step"><div class="step-num">3</div><div class="step-body">Configura credenciales (API key, OAuth o autenticación básica).</div></div><div class="step"><div class="step-num">4</div><div class="step-body">Prueba la conexión → verifica qué herramientas expone.</div></div></div></div><div class="tip-pro"><div class="tip-label">💡 Tip Pro DGI</div><div class="tip-text">Si la DGI tiene sistema documental propio con API, un servidor MCP lo expone a Claude: "¿Cuáles son los expedientes pendientes esta semana?" — Claude consulta el sistema real.</div></div><div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>Los complementos conectan Claude con sistemas propios via MCP</li><li>Requieren URL del servidor y credenciales de acceso</li><li>Habilitan acceso en lenguaje natural a repositorios institucionales</li></ul></div>`,
 
-  m4l1:()=>`
-<div class="lesson-eyebrow">Módulo 4 · Lección 5.1</div>
-<h1 class="lesson-h1">Claude Code</h1>
-<p class="lesson-lead">Claude Code es la interfaz de línea de comandos de Anthropic que convierte a Claude en un desarrollador autónomo. Opera directamente en tu repositorio: lee, escribe, refactoriza y ejecuta código sin intervención manual.</p>
-<div class="content-card">
-  <div class="card-title"><div class="card-icon icon-violet">💻</div>Instalación de Claude Code</div>
-  <div class="steps">
-    <div class="step"><div class="step-num">1</div><div class="step-body">Requisito previo: <strong>Node.js 18+</strong> instalado en tu sistema.</div></div>
-    <div class="step"><div class="step-num">2</div><div class="step-body">En terminal: <code style="background:var(--bg3);padding:2px 6px;border-radius:4px;font-size:12px">npm install -g @anthropic-ai/claude-code</code></div></div>
-    <div class="step"><div class="step-num">3</div><div class="step-body">Navega a tu proyecto: <code style="background:var(--bg3);padding:2px 6px;border-radius:4px;font-size:12px">cd /ruta/a/tu/proyecto</code></div></div>
-    <div class="step"><div class="step-num">4</div><div class="step-body">Inicia Claude Code: <code style="background:var(--bg3);padding:2px 6px;border-radius:4px;font-size:12px">claude</code> → autenticación con tu cuenta Anthropic.</div></div>
-  </div>
-</div>
-<div class="content-card">
-  <div class="card-title"><div class="card-icon icon-orange">🎯</div>Casos de uso DGI</div>
-  <div class="list-items">
-    <div class="list-item"><div class="list-dot"></div><span><strong>Scripts de procesamiento:</strong> "Crea un script Python que procese todos los PDFs de la carpeta /expedientes y genere un CSV con metadatos".</span></div>
-    <div class="list-item"><div class="list-dot"></div><span><strong>Automatización de reportes:</strong> "Refactoriza el script de generación de reportes para que incluya validación de datos y manejo de errores".</span></div>
-    <div class="list-item"><div class="list-dot"></div><span><strong>APIs institucionales:</strong> "Crea un endpoint REST que consulte la base de datos de expedientes y devuelva los pendientes del mes".</span></div>
-  </div>
-</div>
-<div class="tip-pro"><div class="tip-label">💡 Tip Pro</div><div class="tip-text">Antes de dar instrucciones complejas, ejecuta <strong>/init</strong> dentro de Claude Code. Claude analizará tu repositorio completo y creará un CLAUDE.md con el contexto del proyecto. Esto mejora drásticamente la calidad de las modificaciones que sugiere.</div></div>
-<div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>Claude Code opera autónomamente en tu repositorio desde la terminal</li><li>Usa /init para que Claude entienda el contexto de tu proyecto antes de comenzar</li><li>Ideal para automatización de procesos de datos y scripts institucionales</li></ul></div>`,
+m4l1:`<div class="lesson-eyebrow">Módulo 4 · Lección 5.1</div><h1 class="lesson-h1">Claude Code</h1><p class="lesson-lead">La CLI de Anthropic que convierte a Claude en un desarrollador autónomo. Opera directamente en tu repositorio.</p><div class="content-card"><div class="card-title"><div class="card-icon icon-violet">💻</div>Instalación</div><div class="steps"><div class="step"><div class="step-num">1</div><div class="step-body">Requisito: <strong>Node.js 18+</strong> instalado.</div></div><div class="step"><div class="step-num">2</div><div class="step-body"><code style="background:var(--bg3);padding:2px 5px;border-radius:4px;font-size:11px">npm install -g @anthropic-ai/claude-code</code></div></div><div class="step"><div class="step-num">3</div><div class="step-body">Navega a tu proyecto y ejecuta <code style="background:var(--bg3);padding:2px 5px;border-radius:4px;font-size:11px">claude</code>.</div></div><div class="step"><div class="step-num">4</div><div class="step-body">Autentica con tu cuenta Anthropic.</div></div></div></div><div class="content-card"><div class="card-title"><div class="card-icon icon-orange">🎯</div>Casos DGI</div><div class="list-items"><div class="list-item"><div class="list-dot"></div><span><strong>Scripts de procesamiento:</strong> "Procesa todos los PDFs de /expedientes y genera un CSV con metadatos".</span></div><div class="list-item"><div class="list-dot"></div><span><strong>Automatización de reportes:</strong> "Refactoriza el script para incluir validación y manejo de errores".</span></div></div></div><div class="tip-pro"><div class="tip-label">💡 Usa /init primero</div><div class="tip-text">Ejecuta <strong>/init</strong> para que Claude analice tu repositorio completo y cree un CLAUDE.md con el contexto del proyecto. Mejora drásticamente la calidad de las sugerencias.</div></div><div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>Claude Code opera autónomamente en tu repositorio desde la terminal</li><li>Usa /init para que Claude entienda el contexto antes de comenzar</li><li>Ideal para automatización de scripts e integración de datos institucionales</li></ul></div>`,
 
-  m4l2:()=>`
-<div class="lesson-eyebrow">Módulo 4 · Lección 5.2</div>
-<h1 class="lesson-h1">Plugins en Claude</h1>
-<p class="lesson-lead">Los plugins amplían las capacidades nativas de Claude con herramientas especializadas: búsqueda en tiempo real, generación de imágenes, análisis de datos avanzado y más.</p>
-<div class="content-card">
-  <div class="card-title"><div class="card-icon icon-violet">🔌</div>Tipos de Plugins disponibles</div>
-  <div class="list-items">
-    <div class="list-item"><div class="list-dot"></div><span><strong>Búsqueda web:</strong> Claude accede a información en tiempo real para complementar sus respuestas con fuentes actuales.</span></div>
-    <div class="list-item"><div class="list-dot"></div><span><strong>Ejecución de código:</strong> Claude puede ejecutar Python directamente para calcular, graficar y procesar datos en tiempo real.</span></div>
-    <div class="list-item"><div class="list-dot"></div><span><strong>Análisis de archivos:</strong> Procesamiento avanzado de PDFs, imágenes y datasets.</span></div>
-  </div>
-</div>
-<div class="tip-pro"><div class="tip-label">💡 Tip Pro</div><div class="tip-text">Activa el plugin de ejecución de código para análisis estadísticos de datos de gestión. Claude puede cargar tu CSV, calcular indicadores y generar gráficos directamente en la conversación, sin que necesites abrir Python o Excel.</div></div>
-<div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>Los plugins expanden las capacidades de Claude más allá del texto</li><li>La búsqueda web permite respuestas con información actualizada</li><li>La ejecución de código habilita análisis estadístico en tiempo real</li></ul></div>`,
+m4l2:`<div class="lesson-eyebrow">Módulo 4 · Lección 5.2</div><h1 class="lesson-h1">Plugins en Claude</h1><p class="lesson-lead">Los plugins amplían las capacidades nativas con búsqueda en tiempo real, ejecución de código y análisis de datos avanzado.</p><div class="content-card"><div class="card-title"><div class="card-icon icon-violet">🔌</div>Tipos de Plugins</div><div class="list-items"><div class="list-item"><div class="list-dot"></div><span><strong>Búsqueda web:</strong> Acceso a información en tiempo real con fuentes actuales.</span></div><div class="list-item"><div class="list-dot"></div><span><strong>Ejecución de código:</strong> Python directamente en la conversación para calcular, graficar y procesar.</span></div><div class="list-item"><div class="list-dot"></div><span><strong>Análisis de archivos:</strong> PDFs, imágenes y datasets complejos.</span></div></div></div><div class="tip-pro"><div class="tip-label">💡 Tip Pro</div><div class="tip-text">Con el plugin de código activo, Claude puede cargar tu CSV, calcular indicadores y generar gráficos directamente en la conversación, sin abrir Python o Excel.</div></div><div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>Los plugins expanden las capacidades de Claude más allá del texto</li><li>Búsqueda web = respuestas con información actualizada</li><li>Ejecución de código = análisis estadístico en tiempo real</li></ul></div>`,
 
-  m4l3:()=>`
-<div class="lesson-eyebrow">Módulo 4 · Lección 5.3</div>
-<h1 class="lesson-h1">Tareas programadas</h1>
-<p class="lesson-lead">Las tareas programadas permiten a Claude ejecutar acciones de forma autónoma en horarios definidos o bajo condiciones específicas, sin que el usuario esté presente.</p>
-<div class="content-card">
-  <div class="card-title"><div class="card-icon icon-orange">⏰</div>Configurar una tarea programada</div>
-  <div class="steps">
-    <div class="step"><div class="step-num">1</div><div class="step-body">Accede a <strong>claude.ai → Tareas → Nueva tarea programada</strong>.</div></div>
-    <div class="step"><div class="step-num">2</div><div class="step-body">Define el <strong>trigger</strong>: hora específica, frecuencia (diaria/semanal) o evento (nuevo archivo en Drive).</div></div>
-    <div class="step"><div class="step-num">3</div><div class="step-body">Escribe el prompt de la tarea: qué debe hacer Claude cuando se active.</div></div>
-    <div class="step"><div class="step-num">4</div><div class="step-body">Define el <strong>destino</strong>: dónde entrega el resultado (correo, archivo en Drive, Slack).</div></div>
-    <div class="step"><div class="step-num">5</div><div class="step-body">Activa y monitorea desde el panel de tareas.</div></div>
-  </div>
-</div>
-<div class="content-card">
-  <div class="card-title"><div class="card-icon icon-violet">💡</div>Casos de uso DGI</div>
-  <div class="list-items">
-    <div class="list-item"><div class="list-dot"></div><span><strong>Reporte diario:</strong> Cada lunes a las 8am, Claude genera el resumen de expedientes pendientes y lo envía por correo al equipo.</span></div>
-    <div class="list-item"><div class="list-dot"></div><span><strong>Monitoreo de normativas:</strong> Semanalmente, Claude busca actualizaciones normativas y alerta si hay cambios relevantes.</span></div>
-  </div>
-</div>
-<div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>Las tareas programadas automatizan flujos recurrentes sin intervención manual</li><li>Combinan triggers temporales con acciones sobre herramientas conectadas</li><li>Ideales para reportes periódicos y monitoreo automatizado</li></ul></div>`,
+m4l3:`<div class="lesson-eyebrow">Módulo 4 · Lección 5.3</div><h1 class="lesson-h1">Tareas programadas</h1><p class="lesson-lead">Claude ejecuta acciones de forma autónoma en horarios definidos o bajo condiciones específicas, sin que el usuario esté presente.</p><div class="content-card"><div class="card-title"><div class="card-icon icon-orange">⏰</div>Configurar una tarea</div><div class="steps"><div class="step"><div class="step-num">1</div><div class="step-body">claude.ai → <strong>Tareas → Nueva tarea programada.</strong></div></div><div class="step"><div class="step-num">2</div><div class="step-body">Define el <strong>trigger</strong>: hora, frecuencia o evento.</div></div><div class="step"><div class="step-num">3</div><div class="step-body">Escribe el prompt de la tarea.</div></div><div class="step"><div class="step-num">4</div><div class="step-body">Define el <strong>destino</strong>: correo, Drive, Slack.</div></div></div></div><div class="content-card"><div class="card-title"><div class="card-icon icon-violet">💡</div>Casos DGI</div><div class="list-items"><div class="list-item"><div class="list-dot"></div><span><strong>Reporte semanal:</strong> Cada lunes 8am → resumen de expedientes pendientes → correo al equipo.</span></div><div class="list-item"><div class="list-dot"></div><span><strong>Monitoreo normativo:</strong> Semanalmente busca actualizaciones y alerta si hay cambios relevantes.</span></div></div></div><div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>Las tareas programadas automatizan flujos recurrentes sin intervención manual</li><li>Combinan triggers temporales con acciones sobre herramientas conectadas</li><li>Ideales para reportes periódicos y monitoreo automatizado</li></ul></div>`,
 
-  m4l4:()=>`
-<div class="lesson-eyebrow">Módulo 4 · Lección 5.4</div>
-<h1 class="lesson-h1">¿Cómo funcionan los Agentes en Claude?</h1>
-<p class="lesson-lead">Un Agente es Claude con capacidad de planificar, ejecutar y iterar de forma autónoma. A diferencia de una conversación, un agente descompone una tarea compleja en pasos, usa herramientas y completa el objetivo sin intervención constante.</p>
-<div class="content-card">
-  <div class="card-title"><div class="card-icon icon-violet">🤖</div>Arquitectura de un Agente</div>
-  <div class="list-items">
-    <div class="list-item"><div class="list-dot"></div><span><strong>Planificación:</strong> Claude recibe el objetivo y genera un plan de acción con pasos concretos.</span></div>
-    <div class="list-item"><div class="list-dot"></div><span><strong>Ejecución de herramientas:</strong> Cada paso puede invocar conectores, ejecutar código o buscar información.</span></div>
-    <div class="list-item"><div class="list-dot"></div><span><strong>Evaluación:</strong> Claude evalúa el resultado de cada paso y ajusta el plan si es necesario.</span></div>
-    <div class="list-item"><div class="list-dot"></div><span><strong>Entrega:</strong> Al completar todos los pasos, entrega el resultado final al usuario.</span></div>
-  </div>
-</div>
-<div class="tip-pro"><div class="tip-label">💡 Tip Pro</div><div class="tip-text">Los agentes son más efectivos cuando el objetivo está bien definido pero el proceso puede ser flexible. En lugar de "busca información", usa "investiga las últimas 3 actualizaciones de la Ley X, extrae los cambios relevantes para la DGI y genera un resumen ejecutivo de una página". Claude planifica y ejecuta de forma autónoma.</div></div>
-<div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>Los agentes planifican → ejecutan → evalúan → entregan de forma autónoma</li><li>Son más efectivos con objetivos bien definidos y proceso abierto</li><li>Combinan múltiples herramientas en flujos de trabajo complejos</li></ul></div>`,
+m4l4:`<div class="lesson-eyebrow">Módulo 4 · Lección 5.4</div><h1 class="lesson-h1">¿Cómo funcionan los Agentes?</h1><p class="lesson-lead">Un Agente es Claude con capacidad de planificar, ejecutar e iterar autónomamente para completar tareas complejas sin intervención constante.</p><div class="content-card"><div class="card-title"><div class="card-icon icon-violet">🤖</div>Arquitectura de un Agente</div><div class="list-items"><div class="list-item"><div class="list-dot"></div><span><strong>Planificación:</strong> Recibe el objetivo y genera un plan de pasos concretos.</span></div><div class="list-item"><div class="list-dot"></div><span><strong>Ejecución:</strong> Cada paso puede invocar conectores, ejecutar código o buscar información.</span></div><div class="list-item"><div class="list-dot"></div><span><strong>Evaluación:</strong> Revisa el resultado de cada paso y ajusta el plan si es necesario.</span></div><div class="list-item"><div class="list-dot"></div><span><strong>Entrega:</strong> Al completar todos los pasos, entrega el resultado final.</span></div></div></div><div class="tip-pro"><div class="tip-label">💡 Cómo formular objetivos efectivos</div><div class="tip-text">En vez de "busca información", usa: "Investiga las últimas 3 actualizaciones de la Ley X, extrae los cambios relevantes para la DGI y genera un resumen ejecutivo de una página."</div></div><div class="summary-box"><div class="summary-title">Resumen</div><ul class="summary-list"><li>Agentes: planifican → ejecutan → evalúan → entregan autónomamente</li><li>Más efectivos con objetivos bien definidos y proceso abierto</li><li>Combinan múltiples herramientas en flujos de trabajo complejos</li></ul></div>`,
 
-  m4l5:()=>`
-<div class="lesson-eyebrow">Módulo 4 · Lección 5.5</div>
-<h1 class="lesson-h1">Crear Agentes en Claude</h1>
-<p class="lesson-lead">Diseñar un agente efectivo requiere definir claramente su objetivo, las herramientas que puede usar y los criterios de éxito. Esta lección te lleva por el proceso completo.</p>
-<div class="content-card">
-  <div class="card-title"><div class="card-icon icon-orange">🏗️</div>Crear un Agente paso a paso</div>
-  <div class="steps">
-    <div class="step"><div class="step-num">1</div><div class="step-body"><strong>Define el objetivo:</strong> Sé específico sobre qué debe lograr. "Generar un informe mensual de gestión documental con datos de Drive, indicadores calculados y recomendaciones".</div></div>
-    <div class="step"><div class="step-num">2</div><div class="step-body"><strong>Selecciona herramientas:</strong> Elige qué Conectores necesita el agente (Google Drive, Excel, correo).</div></div>
-    <div class="step"><div class="step-num">3</div><div class="step-body"><strong>Define criterios de entrega:</strong> Formato del resultado final, destinatario, estructura esperada.</div></div>
-    <div class="step"><div class="step-num">4</div><div class="step-body"><strong>Ejecuta y supervisa:</strong> En las primeras ejecuciones, revisa cada paso. Claude mostrará su proceso de razonamiento.</div></div>
-    <div class="step"><div class="step-num">5</div><div class="step-body"><strong>Refina y automatiza:</strong> Una vez validado, conviértelo en tarea programada para ejecución autónoma recurrente.</div></div>
-  </div>
-</div>
-<div class="premium-card"><div class="premium-label">⭐ Capacidad Premium</div><div class="tip-text">Los agentes multi-herramienta y las ejecuciones autónomas extendidas requieren plan Teams o Enterprise. El plan Pro permite agentes con herramientas limitadas y supervisión manual.</div></div>
-<div class="tip-pro"><div class="tip-label">💡 Tip Pro: Agente de informes DGI</div><div class="tip-text">Un agente de alto valor para la DGI: "Cada primer lunes del mes, accede a la carpeta 'Expedientes Q' en Drive, cuenta los documentos por estado, calcula los indicadores de cumplimiento de plazo, genera el informe en la plantilla DGI y envíalo al equipo directivo". Un solo agente elimina horas de trabajo manual recurrente.</div></div>
-<div class="summary-box"><div class="summary-title">Resumen del curso</div><ul class="summary-list"><li>Los agentes combinan todo lo aprendido: modelos, herramientas, conectores y automatización</li><li>El ciclo completo: definir → ejecutar → validar → automatizar</li><li>Con agentes bien diseñados, la DGI puede automatizar flujos de alto valor y liberar tiempo para trabajo estratégico</li><li>¡Felicitaciones por completar el curso Domina Claude!</li></ul></div>`
+m4l5:`<div class="lesson-eyebrow">Módulo 4 · Lección 5.5</div><h1 class="lesson-h1">Crear Agentes en Claude</h1><p class="lesson-lead">Diseñar un agente efectivo requiere definir claramente su objetivo, las herramientas disponibles y los criterios de éxito.</p><div class="content-card"><div class="card-title"><div class="card-icon icon-orange">🏗️</div>Crear un Agente</div><div class="steps"><div class="step"><div class="step-num">1</div><div class="step-body"><strong>Define el objetivo:</strong> Específico. "Generar informe mensual de gestión documental con datos de Drive, indicadores y recomendaciones."</div></div><div class="step"><div class="step-num">2</div><div class="step-body"><strong>Selecciona herramientas:</strong> Qué Conectores necesita (Drive, Excel, correo).</div></div><div class="step"><div class="step-num">3</div><div class="step-body"><strong>Criterios de entrega:</strong> Formato, destinatario, estructura esperada.</div></div><div class="step"><div class="step-num">4</div><div class="step-body"><strong>Supervisa las primeras ejecuciones</strong> para validar comportamiento.</div></div><div class="step"><div class="step-num">5</div><div class="step-body"><strong>Automatiza</strong> convirtiéndolo en tarea programada recurrente.</div></div></div></div><div class="premium-card"><div class="premium-label">⭐ Premium</div><div class="tip-text">Agentes multi-herramienta y ejecuciones extendidas requieren plan Teams o Enterprise.</div></div><div class="tip-pro"><div class="tip-label">💡 Agente de informes DGI</div><div class="tip-text">"Cada primer lunes del mes: accede a 'Expedientes Q' en Drive, cuenta documentos por estado, calcula indicadores, genera el informe en plantilla DGI y envíalo al equipo directivo." — Un agente elimina horas de trabajo manual recurrente.</div></div><div class="summary-box"><div class="summary-title">🏆 ¡Curso completado!</div><ul class="summary-list"><li>Los agentes combinan todo lo aprendido: modelos, herramientas, conectores y automatización</li><li>Ciclo: definir → ejecutar → validar → automatizar</li><li>Con agentes bien diseñados, la DGI automatiza flujos de alto valor</li><li>Completa todos los quizzes para obtener tu certificado DGI</li></ul></div>`
 };
 
-let currentLessonId = 'intro-1';
-let completedLessons = new Set();
-let quizAnswers = {};
-let openModules = {intro:true,m1:true,m2:false,m3:false,m4:false};
+let cur='i1',done=new Set(),qA={},open={intro:true,m1:true,m2:false,m3:false,m4:false};
 
-function getAllLessons(){
-  let all=[];
-  MODULES.forEach(m=>{all=all.concat(m.lessons);if(m.quiz)all.push({id:m.id+'-quiz',title:'Quiz: '+m.title,isQuiz:true,moduleId:m.id})});
-  return all;
+function allL(){let a=[];MODULES.forEach(m=>{a=a.concat(m.lessons);if(m.quiz)a.push({id:m.id+'-q',title:'Quiz: '+m.title,isQ:true,mid:m.id})});return a}
+
+function isMobile(){return window.innerWidth<=520}
+
+function toggleSidebar(){
+  const s=document.getElementById('sidebar');
+  const o=document.getElementById('overlay');
+  if(s.classList.contains('open')){s.classList.remove('open');o.classList.remove('show')}
+  else{s.classList.add('open');o.classList.add('show')}
+}
+function closeSidebar(){
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
 }
 
 function renderNav(){
-  const nav=document.getElementById('nav-scroll');
-  nav.innerHTML='';
+  const nav=document.getElementById('nav-scroll');nav.innerHTML='';
   MODULES.forEach(m=>{
-    const mg=document.createElement('div');mg.className='module-group';
+    const mg=document.createElement('div');
     const mh=document.createElement('div');mh.className='module-header';
-    const arrow=openModules[m.id]?'▶':'▶';
-    mh.innerHTML=`<span>${m.title}</span><span class="module-arrow ${openModules[m.id]?'open':''}">${arrow}</span>`;
-    mh.onclick=()=>{openModules[m.id]=!openModules[m.id];renderNav()};
-    mg.appendChild(mh);
-    if(openModules[m.id]){
+    mh.innerHTML=`<span>${m.title}</span><span class="module-arrow ${open[m.id]?'open':''}">▶</span>`;
+    mh.onclick=()=>{open[m.id]=!open[m.id];renderNav()};mg.appendChild(mh);
+    if(open[m.id]){
       m.lessons.forEach(l=>{
         const li=document.createElement('div');
-        li.className='lesson-item'+(l.id===currentLessonId?' active':'')+(completedLessons.has(l.id)?' completed':'');
-        const checkMark=completedLessons.has(l.id)?'✓':'';
-        li.innerHTML=`<div class="lesson-check">${checkMark}</div>${l.title}${l.premium?'<span class="premium-badge">PRO</span>':''}`;
-        li.onclick=()=>{currentLessonId=l.id;renderNav();renderLesson()};
-        mg.appendChild(li);
+        li.className='lesson-item'+(l.id===cur?' active':'')+(done.has(l.id)?' completed':'');
+        li.innerHTML=`<div class="lesson-check">${done.has(l.id)?'✓':''}</div><span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${l.title}</span>${l.premium?'<span class="premium-badge">PRO</span>':''}`;
+        li.onclick=()=>{cur=l.id;if(isMobile())closeSidebar();renderNav();renderLesson()};mg.appendChild(li);
       });
       if(m.quiz){
-        const qid=m.id+'-quiz';
+        const qid=m.id+'-q';
         const qi=document.createElement('div');
-        qi.className='lesson-item'+(qid===currentLessonId?' active':'')+(completedLessons.has(qid)?' completed':'');
-        qi.innerHTML=`<div class="lesson-check">${completedLessons.has(qid)?'✓':''}</div>🧪 Quiz: ${m.title}`;
-        qi.onclick=()=>{currentLessonId=qid;renderNav();renderLesson()};
-        mg.appendChild(qi);
+        qi.className='lesson-item'+(qid===cur?' active':'')+(done.has(qid)?' completed':'');
+        qi.innerHTML=`<div class="lesson-check">${done.has(qid)?'✓':''}</div><span style="flex:1">🧪 Quiz</span>`;
+        qi.onclick=()=>{cur=qid;if(isMobile())closeSidebar();renderNav();renderLesson()};mg.appendChild(qi);
       }
     }
     nav.appendChild(mg);
   });
-  updateProgress();
-}
-
-function updateProgress(){
-  const all=getAllLessons();
-  const pct=Math.round((completedLessons.size/all.length)*100);
+  const al=allL(),pct=Math.round((done.size/al.length)*100);
   document.getElementById('prog-pct').textContent=pct+'%';
   document.getElementById('prog-bar').style.width=pct+'%';
+  document.getElementById('topbar-prog').textContent=pct+'%';
 }
 
 function renderLesson(){
   const body=document.getElementById('lesson-body');
-  const main=document.getElementById('main-area');
-  main.scrollTop=0;
-
-  if(currentLessonId.endsWith('-quiz')){
-    const moduleId=currentLessonId.replace('-quiz','');
-    renderQuiz(moduleId);
-    return;
-  }
-
-  const lesson=getAllLessons().find(l=>l.id===currentLessonId);
-  const contentKey=lesson?lesson.content:null;
-  const contentFn=contentKey&&CONTENT[contentKey];
-  const html=contentFn?contentFn():`<div class="lesson-eyebrow">Próximamente</div><h1 class="lesson-h1">Esta lección está en desarrollo</h1><p class="lesson-lead">El contenido de esta lección estará disponible pronto.</p>`;
-
-  const allLessons=getAllLessons();
-  const idx=allLessons.findIndex(l=>l.id===currentLessonId);
-  const prev=idx>0?allLessons[idx-1]:null;
-  const next=idx<allLessons.length-1?allLessons[idx+1]:null;
-
-  body.innerHTML=html+`
-<div class="bottom-bar">
-  <div style="display:flex;gap:8px;align-items:center">
-    ${prev?`<button class="btn-prev" onclick="goTo('${prev.id}')">← Anterior</button>`:'<div></div>'}
-    <span class="lesson-counter">${idx+1} / ${allLessons.length}</span>
-  </div>
-  <button class="btn-complete" onclick="completeAndNext('${next?next.id:''}')">
-    ${completedLessons.has(currentLessonId)?'✓ Completada':'Completar y siguiente →'}
-  </button>
-</div>`;
+  document.getElementById('main-area').scrollTop=0;
+  if(cur.endsWith('-q')){renderQuiz(cur.replace('-q',''));return}
+  const al=allL(),idx=al.findIndex(l=>l.id===cur);
+  const prev=idx>0?al[idx-1]:null,next=idx<al.length-1?al[idx+1]:null;
+  const l=al[idx];
+  const key=l?l.content:null;
+  const title=l?l.title:'';
+  document.getElementById('topbar-title').textContent=title||'Domina Claude: DGI';
+  body.innerHTML=(key&&C[key]?C[key]:`<div class="lesson-eyebrow">Próximamente</div><h1 class="lesson-h1">Lección en desarrollo</h1><p class="lesson-lead">Este contenido estará disponible pronto.</p>`)+
+  `<div class="bottom-bar"><div style="display:flex;gap:8px;align-items:center">${prev?`<button class="btn-prev" onclick="goTo('${prev.id}')">← Ant.</button>`:'<span></span>'}<span class="lesson-counter">${idx+1} / ${al.length}</span></div><button class="btn-complete" onclick="complete('${next?next.id:''}')">${done.has(cur)?'✓ Lista':'Completar →'}</button></div>`;
 }
 
-function renderQuiz(moduleId){
+function renderQuiz(mid){
   const body=document.getElementById('lesson-body');
-  const quiz=QUIZZES[moduleId];
-  if(!quiz){body.innerHTML=`<div class="lesson-eyebrow">Quiz</div><h1 class="lesson-h1">Quiz próximamente</h1>`;return;}
-
-  let html=`<div class="lesson-eyebrow">Verificación de conocimiento</div><h1 class="lesson-h1">${quiz.title}</h1><div class="quiz-section"><div class="quiz-title">Pon a prueba lo aprendido</div><div class="quiz-sub">3 preguntas de opción múltiple · Selecciona la respuesta correcta</div>`;
-
-  quiz.questions.forEach((q,qi)=>{
-    const qKey=moduleId+'-'+qi;
-    const ans=quizAnswers[qKey];
-    html+=`<div class="quiz-q"><div class="quiz-q-text">${qi+1}. ${q.q}</div><div class="quiz-options">`;
-    q.opts.forEach((opt,oi)=>{
+  const q=QUIZZES[mid];if(!q){body.innerHTML='<h1 class="lesson-h1">Quiz próximamente</h1>';return}
+  document.getElementById('topbar-title').textContent=q.title;
+  const al=allL(),qid=mid+'-q',idx=al.findIndex(l=>l.id===qid);
+  const prev=idx>0?al[idx-1]:null,next=idx<al.length-1?al[idx+1]:null;
+  let h=`<div class="lesson-eyebrow">Verificación de conocimiento</div><h1 class="lesson-h1">${q.title}</h1><div class="quiz-section"><div class="quiz-title">Pon a prueba lo aprendido</div><div class="quiz-sub">3 preguntas · Selecciona la respuesta correcta</div>`;
+  q.questions.forEach((qi,i)=>{
+    const k=mid+'-'+i,ans=qA[k];
+    h+=`<div class="quiz-q"><div class="quiz-q-text">${i+1}. ${qi.q}</div><div class="quiz-options">`;
+    qi.opts.forEach((o,oi)=>{
       let cls='quiz-opt';
-      if(ans!==undefined){
-        if(oi===q.correct)cls+=' reveal-correct';
-        if(ans===oi&&oi!==q.correct)cls+=' selected-wrong';
-        if(ans===oi&&oi===q.correct)cls+=' selected-correct';
-      }
-      const disabled=ans!==undefined?'style="pointer-events:none"':'';
-      html+=`<button class="${cls}" ${disabled} onclick="answerQuiz('${moduleId}',${qi},${oi})">${String.fromCharCode(65+oi)}. ${opt}</button>`;
+      if(ans!==undefined){if(oi===qi.correct)cls+=' reveal-correct';if(ans===oi&&oi!==qi.correct)cls+=' selected-wrong';if(ans===oi&&oi===qi.correct)cls+=' selected-correct';}
+      h+=`<button class="${cls}" ${ans!==undefined?'style="pointer-events:none"':''} onclick="ansQ('${mid}',${i},${oi})">${String.fromCharCode(65+oi)}. ${o}</button>`;
     });
-    if(ans!==undefined){
-      const correct=ans===q.correct;
-      html+=`<div class="quiz-feedback ${correct?'correct':'wrong'}">${correct?'✓ Correcto. ':'✗ Incorrecto. '}${q.exp}</div>`;
-    }
-    html+=`</div></div>`;
+    if(ans!==undefined)h+=`<div class="quiz-feedback ${ans===qi.correct?'correct':'wrong'}">${ans===qi.correct?'✓ Correcto. ':'✗ Incorrecto. '}${qi.exp}</div>`;
+    h+=`</div></div>`;
   });
-  html+=`</div>`;
-
-  const allLessons=getAllLessons();
-  const qid=moduleId+'-quiz';
-  const idx=allLessons.findIndex(l=>l.id===qid);
-  const prev=idx>0?allLessons[idx-1]:null;
-  const next=idx<allLessons.length-1?allLessons[idx+1]:null;
-
-  const answered=quiz.questions.every((_,qi)=>quizAnswers[moduleId+'-'+qi]!==undefined);
-
-  html+=`<div class="bottom-bar">
-    <div style="display:flex;gap:8px;align-items:center">
-      ${prev?`<button class="btn-prev" onclick="goTo('${prev.id}')">← Anterior</button>`:'<div></div>'}
-    </div>
-    ${answered?`<button class="btn-complete" onclick="completeAndNext('${next?next.id:''}')">Continuar →</button>`:`<span style="font-size:13px;color:var(--muted)">Responde todas las preguntas para continuar</span>`}
-  </div>`;
-
-  body.innerHTML=html;
+  const allAns=q.questions.every((_,i)=>qA[mid+'-'+i]!==undefined);
+  h+=`</div><div class="bottom-bar"><div style="display:flex;gap:8px;align-items:center">${prev?`<button class="btn-prev" onclick="goTo('${prev.id}')">← Ant.</button>`:'<span></span>'}</div>${allAns?`<button class="btn-complete" onclick="complete('${next?next.id:''}')">Continuar →</button>`:`<span style="font-size:11px;color:var(--muted)">Responde todas para continuar</span>`}</div>`;
+  body.innerHTML=h;
 }
 
-function answerQuiz(moduleId,qi,oi){
-  quizAnswers[moduleId+'-'+qi]=oi;
-  renderLesson();
-}
-
-function completeAndNext(nextId){
-  completedLessons.add(currentLessonId);
-  if(nextId){
-    currentLessonId=nextId;
-    const moduleId=currentLessonId.split('-')[0];
-    if(!openModules[moduleId])openModules[moduleId]=true;
-  }
-  renderNav();
-  renderLesson();
-}
-
-function goTo(id){
-  currentLessonId=id;
-  const moduleId=id.split('-')[0];
-  if(!openModules[moduleId])openModules[moduleId]=true;
-  renderNav();
-  renderLesson();
-}
+function ansQ(mid,i,oi){qA[mid+'-'+i]=oi;renderLesson()}
+function complete(nxt){done.add(cur);if(nxt){cur=nxt;const mid=cur.split('-')[0];if(!open[mid])open[mid]=true}renderNav();renderLesson()}
+function goTo(id){cur=id;const mid=id.split('-')[0];if(!open[mid])open[mid]=true;renderNav();renderLesson()}
 
 renderNav();
 renderLesson();
